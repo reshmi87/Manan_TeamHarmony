@@ -73,3 +73,8 @@ Background:
       | Recommended diagnostic tests                 |
       | Specialist referral recommendations          |
       | Warning signs requiring escalation           |
+
+  Scenario: Validation of Share Analysis with PDF Generation
+    Given The user completed a case and AI analysis is displayed
+    When The user click the "Share Analysis" button
+    Then The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.
