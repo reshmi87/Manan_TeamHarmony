@@ -16,9 +16,12 @@ Given The user is on the checkout page
 When The user enters valid credit card information in the payment method form 
 Then The payment form should be ready for submission 
 
-Background: User provided the payment details 
+Scenario: Submitting the payment
+Given The user is on the checkout page
+When The user submits the payment form with valid credit card information
+Then The user should see a confirmation message indicating successful payment
 
-Scenario: Verify the subscribe button
-Given The user entered the valid information
-When The user clicks the subscribe button
-Then The user should get the Success notification
+Scenario: Handling payment errors
+Given The user is on the checkout page
+When The user enters invalid credit card information in the payment method form
+Then The user should see an error message indicating payment failure due to invalid details
