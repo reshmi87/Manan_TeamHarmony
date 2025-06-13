@@ -15,8 +15,7 @@ Scenario: Enter credentials to signup
     Then The user should be redirected to the medical triage dashboard with a success toast notification
 
 Scenario: Sign in with missing credentials
-    When The user leaves the "Username" and "Password" fields blank
-    And The user clicks the "Sign In" button
+    When The user leaves the "Username" and "Password" fields blank and The user clicks the "Sign In" button
     Then An error message should be displayed prompting to Please fill in all fields
 
 
