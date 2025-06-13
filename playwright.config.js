@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { defineBddConfig } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
-  features: ['tests/Features/Settings.feature'],
+  features: ['tests/Features/PatientData.feature'],
   });
 
 /**
