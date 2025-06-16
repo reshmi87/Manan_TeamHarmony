@@ -1,53 +1,129 @@
 import { createBdd } from "playwright-bdd";
+import { expect} from '@playwright/test';
+const Login = require("../PageObject/Login.js");
+const  DashboardPage  = require("../PageObject/DashboardPage.js");
 
 const{Given,When,Then} = createBdd();
 
-Given('The user launched the Manan application and logged in successfully', async ({}) => {
-  // Step: Given The user launched the Manan application and logged in successfully
-  // From: tests\Features\Dashboard.feature:4:1
+Given('The user launched the Manan application and logged in successfully', async ({page}) => {
+  const loginpage = new Login(page);
+  await loginpage.signintomanan() ;
 });
 
-Given('The user is in the Self Assessment page', async ({}) => {
-  // Step: Given The user is in the Self Assessment page
-  // From: tests\Features\Dashboard.feature:7:1
+Given('The user is in the Self Assessment page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  const textinpage = await dashboard.checkifselfassessmentpage();
+  console.log("The user is in the "+textinpage+" page.");
+  expect(textinpage).toContain('Multi-Algorithm Navigation and Analysis Node');
 });
 
-When('The user clicks on the Dashboard button on the top', async ({}) => {
-  // Step: When The user clicks on the Dashboard button on the top
-  // From: tests\Features\Dashboard.feature:8:1
+When('The user clicks on the Dashboard button on the top', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.launchdashboard();
 });
 
-Then('Dashboard page is displayed and every details in the Medical Dashboard, Usage Statistics, Analysis Usage, Recent Assessment, Account Settings, Subscription and Assessment History blocks are displayed properly', async ({}) => {
-  // Step: Then Dashboard page is displayed and every details in the Medical Dashboard, Usage Statistics, Analysis Usage, Recent Assessment, Account Settings, Subscription and Assessment History blocks are displayed properly
-  // From: tests\Features\Dashboard.feature:9:1
+Then('Dashboard page is displayed and every details in the Medical Dashboard, Usage Statistics, Analysis Usage, Recent Assessment, Account Settings, Subscription and Assessment History blocks are displayed properly', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkdashboardpageui();
 });
 
-Given('The user is in the Dashboard page', async ({}) => {
-  // Step: Given The user is in the Dashboard page
-  // From: tests\Features\Dashboard.feature:12:1
+Given('The user is in the Dashboard page', async ({page}) => {
+   const dashboard = new DashboardPage(page);
+   await dashboard.launchdashboard();
 });
 
-When('The user click on the Start New Assessment button in the Welcome block', async ({}) => {
-  // Step: When The user click on the Start New Assessment button in the Welcome block
-  // From: tests\Features\Dashboard.feature:13:1
+When('The user click on the Start New Assessment button in the Welcome block', async ({page}) => {
+   const dashboard = new DashboardPage(page);
+   await dashboard.clickstartnewassessmentbutton();
 });
 
-Then('Self Assessment page is displayed', async ({}) => {
-  // Step: Then Self Assessment page is displayed
-  // From: tests\Features\Dashboard.feature:14:1
+Then('Self Assessment page is displayed', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  const textinpage = await dashboard.checkifselfassessmentpage();
+  console.log("The user is in the "+textinpage+" page.");
+  expect(textinpage).toContain('Multi-Algorithm Navigation and Analysis Node');
 });
 
-When('The user click on the View Previous Assessments button in the Welcome block', async ({}) => {
-  // Step: When The user click on the View Previous Assessments button in the Welcome block
-  // From: tests\Features\Dashboard.feature:18:1
+When('The user click on the View Previous Assessments button in the Welcome block', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickpreviousassessmentbutton();
 });
 
-Then('Previous Assessments page is displayed', async ({}) => {
-  // Step: Then Previous Assessments page is displayed
-  // From: tests\Features\Dashboard.feature:19:1
+Then('Previous Assessments page is displayed', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkpreviousassessmentpage();
 });
 
-When('The user clicks on the Start your first assessment link in the Recent Assessment Block.', async ({}) => {
-  // Step: When The user clicks on the Start your first assessment link in the Recent Assessment Block.
-  // From: tests\Features\Dashboard.feature:23:1
+When('The user clicks on the Start your first assessment link in the Recent Assessment Block.', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickstartyourfirstassessmentlink();
+});
+
+When('The user clicks on the Update settings link from Account settings block', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickupdatesettingslink();
+});
+
+Then('Settings page is displayed', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checksettingpage();
+});
+
+When('The user clicks on Upgrade now link is from Subscription Plans block', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickupgradenowlink();
+});
+
+Then('Subscription page is displayed', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checksubscriptionpage();
+});
+
+When('The user clicks on the View History link from Assessment History page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickviewhistorylink();
+});
+
+When('The user clicks on the Upgrade to Premium button in Analysis usage block.', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickupgradetopremiumbutton();
+});
+
+When('The user clicks on the User Profile link on the top right corner', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickprofilelink();
+});
+
+Then('User profile with Profile name and email id and options Settings, Previous Assessment, Subscription Plan and Log out are displayed', async ({page}) => {      
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkprofileoptions();
+});
+
+When('The user clicks on Settings from Profile link on the top', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilesettings();
+});
+
+When('The user clicks on Previous Assessment from Profile link', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilepreviousassess();
+});
+
+When('The user clicks on Subscription plan from Profile link', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilesubscriptionplans();
+});
+
+When('The user clicks on Log out from Profile link on the top', async ({page}) => {
+ const dashboard = new DashboardPage(page);
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilelogout();
+});
+
+Then('User is successfully logged out', async ({page}) => {
+   const dashboard = new DashboardPage(page);
+   await dashboard.checkloggedout();
 });
