@@ -1,5 +1,5 @@
 const { expect } = require('@playwright/test');
-const SigninData = require('../../TestData/SigninData.json');
+const SigninData = require('../TestData/SigninData.json');
 
 export class SigninWindowPage {
   constructor(page) {

@@ -1,7 +1,7 @@
 import { createBdd } from 'playwright-bdd';
 
-const { SigninWindowPage } = require('../PageObjects/SigninWindowPage.js');
-const { HomePage } = require('../PageObjects/HomePage.js');
+const { SigninWindowPage } = require('../PageObject/SigninWindowPage.js');
+const { HomePage } = require('../PageObject/HomePage.js');
 
 const { Given, When, Then } = createBdd();
 
