@@ -1,0 +1,45 @@
+{
+  "mismatchedPasswords": {
+    "username": "Team Harmony",
+    "password": "GirlPower123!",
+    "confirmPassword": "Girl123!",
+    "error": "Passwords do not match"
+  },
+  "existingUser": {
+    "username": "Team Harmony",
+    "password": "GirlPower123!",
+    "confirmPassword": "GirlPower123!",
+    "error": "Registration Failed Username already exists",
+    "success": "Authentication SuccessfulWelcome to MANAN Medical Assistant."
+  },
+  "validSignup": {
+    "username": "TestUser",
+    "password": "password123",
+    "confirmPassword": "password123",
+    "success": "Account has been created successfully"
+  },
+   "blankConfirmPassword": {
+    "username": "Team Harmony",
+    "password": "GirlPower123!",
+    "error": "Please fill in all fields"
+ },
+  "blankPasswords": {
+    "username": "Team Harmony",
+    "error": "Please fill in all fields"
+ },
+  "InvalidUsername": {
+    "username": "Team Harmone",
+    "password": "GirlPower123!",
+    "error": "Incorrect Username."
+  },
+   "InvalidPassword": {
+     "username": "Team Harmony",
+     "password": "GirlPower123",
+     "error": "Incorrect Password."
+  },
+  "googleUser": {
+    "email": "meenaatesting@gmail.com",
+    "password": "PlayWright1",
+    "success": "Login successful"
+  }
+}

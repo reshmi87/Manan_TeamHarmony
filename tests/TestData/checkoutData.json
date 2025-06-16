@@ -1,0 +1,52 @@
+{
+    "validCheckoutData": {
+        "cardHolderName": "Team Harmony",
+        "cardNumber": "424242424242424",
+        "expiration": "12/25",
+        "cvv": "123",
+        "zipCode": "12345"
+    },
+    "MissingCardHolderName": {
+        "cardNumber": "424242424242424",
+        "expiration": "12/25",
+        "cvv": "123",
+        "zipCode": "12345",
+        "error": "Required"
+    },
+    "EmptyCardNumber": {
+        "cardHolderName": "Team Harmony",
+        "expiration": "12/25",
+        "cvv": "123",
+        "zipCode": "12345",
+        "error": "Required"
+    },
+    "InvalidCardNumber": {
+        "cardHolderName": "Team Harmony",
+        "cardNumber": "4242424242424", 
+        "expiration": "12/25",
+        "cvv": "123",
+        "zipCode": "12345",
+        "error": "Your card number is invalid"
+    },
+    "Missingexpiration": {
+        "cardHolderName": "Team Harmony",
+        "cardNumber": "424242424242424",
+        "cvv": "123",
+        "zipCode": "12345",
+        "error": "Required"
+    },
+    "Invalidexpiration": {
+        "cardHolderName": "Team Harmony",
+        "cardNumber": "424242424242424",
+        "expiration": "12/20", 
+        "cvv": "123",
+        "zipCode": "12345",
+        "error": "Your card's expiration date is in the past"
+    }
+
+
+
+
+
+
+}
