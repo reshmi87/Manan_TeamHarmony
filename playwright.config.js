@@ -3,8 +3,8 @@ const { defineConfig, devices } = require('@playwright/test');
 import { defineBddConfig } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
-  features:['tests/Features/PatientData.feature'],
- //steps:['tests/StepDefinitions/*.js','tests/Hooks/Hooks.js'],
+  features:['tests/Features/Settings.feature'],
+ steps:['tests/StepDefinitions/***.js','tests/Hooks/hooks.js'],
  
 });
 /**
@@ -20,6 +20,8 @@ const testDir = defineBddConfig({
  */
 export default defineConfig({
   //testDir: './e2e',
+  globalSetup: 'tests/Utilities/globalSetup.js',
+  testDir,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -37,6 +39,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+     headless: false, // launch browser with GUI for debugging
+
   },
 
   /* Configure projects for major browsers */
