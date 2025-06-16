@@ -6,10 +6,10 @@ const SettingsPage = require("../PageObject/SettingsPage.js");
 
 const{Given,When,Then} = createBdd();
 
-When('The user clicks on the Update settings link from Account settings block', async ({page}) => {
-    const dashboard = new DashboardPage(page);
-    dashboard.clickupdatesettingslink();
-});
+// When('The user clicks on the Update settings link from Account settings block', async ({page}) => {
+//     const dashboard = new DashboardPage(page);
+//     dashboard.clickupdatesettingslink();
+// });
 
 Then('User profile information with email id is displayed in the User Profile section in the settings page', async ({page}) => {
   // Step: Then User profile information with email id is displayed in the User Profile section in the settings page
