@@ -16,7 +16,7 @@ class DashboardPage {
         this.usagestatisticstext = page.getByText('Track your AI analysis usage');
         this.analysisusagetitle = page.getByRole('heading', { name: 'Analysis Usage' });
         this.analysisusagetext = page.getByText('Free tier allows 20 analyses');
-        this.analysisusagegraph = page.locator('div').filter({ hasText: /^0of 20$/ }).nth(2);
+        this.analysisusagegraph = page.locator('text=of 20');
         this.upgradetopremiumbutton = page.getByRole('link', { name: 'Upgrade to Premium' });
         this.recentassessmenttitle = page.getByRole('heading', { name: 'Recent Assessments' });
         this.recentassessmenttext = page.getByText('You have no recent');
@@ -38,14 +38,26 @@ class DashboardPage {
         this.premiumplanblock = page.getByText('Premium Plan');
         this.currentplanblock = page.getByText('Current Plan: Free');
 
-        this.profilelink = page.getByRole('button', { name: 'N', exact: true });
+        this.profilelink = page.locator('#root > div > nav > div > button');
         this.profileemailid = page.locator('div').filter({ hasText: process.env.username }).nth(2);
         this.profilesettings = page.getByText('Settings', { exact: true });
         this.profilepreviousassess = page.getByText('Previous Assessments', { exact: true });
         this.profilesubscriptionplans = page.getByLabel('N', { exact: true }).getByText('Subscription Plans');
         this.profilelogout = page.getByText('Log out');
-        this.sessionended = page.getByText('Session Ended');
-        this.loggedouttext = page.getByText('You have been securely logged');
+        this.sessionended = page.locator('div.text-sm.font-semibold', { hasText: 'Session Ended' });
+        this.loggedouttext = page.locator('div.text-sm.opacity-90', { hasText: 'You have been securely logged out of MANAN Medical Assistant.' });
+    
+        //Premium account Page Elements
+        this.premiumusagestatisticstext = page.getByText('Track your AI analysis usage');
+        this.premiumusage = page.getByRole('heading', { name: 'Premium Usage' });
+        this.premiumusagetext = page.getByText('Unlimited AI analysis with');
+        this.assessmentsofarbypremium = page.getByText('Used');
+        this.subscriptionplantext = page.getByText('You\'re on the Premium plan');
+        this.viewyourplanlink = page.getByRole('button', { name: 'View your plan →' });
+        this.currentplan = page.getByText('Current Plan: Premium');
+
+        //FirstTimeuser
+        this.newusergraph = page.locator('div').filter({ hasText: /^0of 20$/ }).nth(2);
     }
 
     async checkifselfassessmentpage(){
@@ -57,28 +69,28 @@ class DashboardPage {
     }
     
     async checkdashboardpageui(){
-        await expect(this.welcometitle).toBeVisible;
-        await expect(this.welcometext).toBeVisible;
-        await expect(this.startnewassessmentbutton).toBeVisible;
-        await expect(this.previousassessmentbutton).toBeVisible;
-        await expect(this.usagestatisticstitle).toBeVisible;
-        await expect(this.usagestatisticstext).toBeVisible;
-        await expect(this.analysisusagetitle).toBeVisible;
-        await expect(this.analysisusagetext).toBeVisible;
-        await expect(this.analysisusagegraph).toBeVisible;
-        await expect(this.upgradetopremiumbutton).toBeVisible;
-        await expect(this.recentassessmenttitle).toBeVisible;
-        await expect(this.recentassessmenttext).toBeVisible;
-        await expect(this.startyourfirstassessmentlink).toBeVisible;
-        await expect(this.accountsettingstitle).toBeVisible;
-        await expect(this.accoutnsettingstext).toBeVisible;
-        await expect(this.updatesettingslink).toBeVisible;
-        await expect(this.subscriptionplanstitle).toBeVisible;
-        await expect(this.subscriptionplanstext).toBeVisible;
-        await expect(this.upgradenowlink).toBeVisible;
-        await expect(this.assessmenthistorytitle).toBeVisible;
-        await expect(this.assessmenthistorytext).toBeVisible;
-        await expect(this.viewhistorylink).toBeVisible;
+        await expect(this.welcometitle).toBeVisible();
+        await expect(this.welcometext).toBeVisible();
+        await expect(this.startnewassessmentbutton).toBeVisible();
+        await expect(this.previousassessmentbutton).toBeVisible();
+        await expect(this.usagestatisticstitle).toBeVisible();
+        await expect(this.usagestatisticstext).toBeVisible();
+        await expect(this.analysisusagetitle).toBeVisible();
+        await expect(this.analysisusagetext).toBeVisible();
+        await expect(this.analysisusagegraph).toBeVisible();
+        await expect(this.upgradetopremiumbutton).toBeVisible();
+        await expect(this.recentassessmenttitle).toBeVisible();
+        await expect(this.recentassessmenttext).toBeVisible();
+        await expect(this.startyourfirstassessmentlink).toBeVisible();
+        await expect(this.accountsettingstitle).toBeVisible();
+        await expect(this.accoutnsettingstext).toBeVisible();
+        await expect(this.updatesettingslink).toBeVisible();
+        await expect(this.subscriptionplanstitle).toBeVisible();
+        await expect(this.subscriptionplanstext).toBeVisible();
+        await expect(this.upgradenowlink).toBeVisible();
+        await expect(this.assessmenthistorytitle).toBeVisible();
+        await expect(this.assessmenthistorytext).toBeVisible();
+        await expect(this.viewhistorylink).toBeVisible();
     }
 
     async clickstartnewassessmentbutton() {
@@ -90,7 +102,7 @@ class DashboardPage {
     }
 
     async checkpreviousassessmentpage() {
-        await expect(this.previousassessmentpage).toBeVisible;
+        await expect(this.previousassessmentpage).toBeVisible();
     }
 
     async clickstartyourfirstassessmentlink(){
@@ -102,7 +114,7 @@ class DashboardPage {
     }
 
     async checksettingpage() {
-        await expect(this.settingpage).toBeVisible;
+        await expect(this.settingpage).toBeVisible();
     }
 
     async clickupgradenowlink(){
@@ -110,10 +122,10 @@ class DashboardPage {
     }
 
     async checksubscriptionpage(){
-        await expect(this.subscriptionpage).toBeVisible;
-        await expect(this.freeplanblock).toBeVisible;
-        await expect(this.premiumplanblock).toBeVisible;
-        await expect(this.currentplanblock).toBeVisible;
+        await expect(this.subscriptionpage).toBeVisible();
+        await expect(this.freeplanblock).toBeVisible();
+        await expect(this.premiumplanblock).toBeVisible();
+        await expect(this.currentplanblock).toBeVisible();
     }
 
     async clickviewhistorylink(){
@@ -129,11 +141,11 @@ class DashboardPage {
     }
 
     async checkprofileoptions(){
-        await expect(this.profileemailid).toBeVisible;
-        await expect(this.profilesettings).toBeVisible;
-        await expect(this.profilepreviousassess).toBeVisible;
-        await expect(this.profilesubscriptionplans).toBeVisible;
-        await expect(this.profilelogout).toBeVisible;
+        await expect(this.profileemailid).toBeVisible();
+        await expect(this.profilesettings).toBeVisible();
+        await expect(this.profilepreviousassess).toBeVisible();
+        await expect(this.profilesubscriptionplans).toBeVisible();
+        await expect(this.profilelogout).toBeVisible();
         const email = await this.profileemailid.textContent();
         console.log("Profile belongs to: "+email);
     }
@@ -155,8 +167,45 @@ class DashboardPage {
     }
 
     async checkloggedout(){
-        await expect(this.sessionended).toBeVisible;
-        await expect(this.loggedouttext).toBeVisible;
+        await expect(this.sessionended).toBeVisible();
+        await expect(this.loggedouttext).toBeVisible({ timeout: 50000 });
+    }
+
+    async checkpremiumaccount(){
+        await expect(this.welcometitle).toBeVisible();
+        await expect(this.welcometext).toBeVisible();
+        await expect(this.startnewassessmentbutton).toBeVisible();
+        await expect(this.previousassessmentbutton).toBeVisible();
+        await expect(this.usagestatisticstitle).toBeVisible();
+        await expect(this.premiumusagestatisticstext).toBeVisible();
+        console.log(this.premiumusagestatisticstext.textContent());
+        await expect(this.premiumusage).toBeVisible();
+        await expect(this.premiumusagetext).toBeVisible();
+        console.log(this.premiumusagetext.textContent());
+        await expect(this.recentassessmenttitle).toBeVisible();
+        await expect(this.recentassessmenttext).toBeVisible();
+        await expect(this.startyourfirstassessmentlink).toBeVisible();
+        await expect(this.accountsettingstitle).toBeVisible();
+        await expect(this.accoutnsettingstext).toBeVisible();
+        await expect(this.updatesettingslink).toBeVisible();
+        await expect(this.subscriptionplanstitle).toBeVisible();
+        await expect(this.assessmentsofarbypremium).toBeVisible();
+        await expect(this.subscriptionplantext).toBeVisible();
+        console.log(this.subscriptionplantext.textContent());
+        await expect(this.viewyourplanlink).toBeVisible();
+        await expect(this.assessmenthistorytitle).toBeVisible();
+        await expect(this.assessmenthistorytext).toBeVisible();
+        await expect(this.viewhistorylink).toBeVisible();
+    }
+
+    async clickviewyourplan(){
+        await this.viewyourplanlink.click();
+        await expect(this.currentplan).toBeVisible();
+        console.log(this.currentplan.textContent());
+    }
+
+    async checkgraphfornewuser(){
+        await expect(this.newusergraph).toBeVisible();
     }
 }
 

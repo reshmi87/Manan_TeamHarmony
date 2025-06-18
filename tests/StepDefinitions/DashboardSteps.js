@@ -1,6 +1,7 @@
 import { createBdd } from "playwright-bdd";
 import { expect} from '@playwright/test';
 const Login = require("../PageObject/Login.js");
+const SigninWindowPage = require("../PageObject/SigninWindowPage.js");
 const  DashboardPage  = require("../PageObject/DashboardPage.js");
 
 const{Given,When,Then} = createBdd();
@@ -126,4 +127,38 @@ When('The user clicks on Log out from Profile link on the top', async ({page}) =
 Then('User is successfully logged out', async ({page}) => {
    const dashboard = new DashboardPage(page);
    await dashboard.checkloggedout();
+});
+
+Given('The user signed in to his premium account using Google Sign in', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  const login = new Login(page);
+  await dashboard.launchdashboard();
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilelogout();
+  await login.Premiumusersignin();
+});
+
+When('The user navigates to the Dashboard page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.launchdashboard();
+});
+
+Then('Every blocks and link in the dashboard page are displayed properly for the Premium user', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkpremiumaccount();
+  await dashboard.clickviewyourplan();
+});
+
+Given('The new user signed to Manan application', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  const login = new Login(page);
+  await dashboard.launchdashboard();
+  await dashboard.clickprofilelink();
+  await dashboard.clickprofilelogout();
+  await login.newusersignin();
+});
+
+Then('The graph under Analysis Usage shows the graph properly for new user', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkgraphfornewuser();
 });
