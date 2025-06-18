@@ -85,6 +85,18 @@ test.describe('Dashboard Validation', () => {
     await Then('User is successfully logged out', null, { page }); 
   });
 
+  test('Validate the Dashboard page when signed in to the premium accoutn through Google Sign in', async ({ Given, page, When, Then }) => { 
+    await Given('The user signed in to his premium account using Google Sign in', null, { page }); 
+    await When('The user navigates to the Dashboard page', null, { page }); 
+    await Then('Every blocks and link in the dashboard page are displayed properly for the Premium user', null, { page }); 
+  });
+
+  test('Validate the Analysis Usage graph shows 0 of 20 for the new user', async ({ Given, page, When, Then }) => { 
+    await Given('The new user signed to Manan application', null, { page }); 
+    await When('The user navigates to the Dashboard page', null, { page }); 
+    await Then('The graph under Analysis Usage shows the graph properly for new user', null, { page }); 
+  });
+
 });
 
 // == technical section ==
@@ -114,4 +126,6 @@ const bddFileData = [ // bdd-data-start
   {"pwTestLine":70,"pickleLine":56,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given The user launched the Manan application and logged in successfully","isBg":true,"stepMatchArguments":[]},{"pwStepLine":71,"gherkinStepLine":57,"keywordType":"Context","textWithKeyword":"Given The user is in the Dashboard page","stepMatchArguments":[]},{"pwStepLine":72,"gherkinStepLine":58,"keywordType":"Action","textWithKeyword":"When The user clicks on Previous Assessment from Profile link","stepMatchArguments":[]},{"pwStepLine":73,"gherkinStepLine":59,"keywordType":"Outcome","textWithKeyword":"Then Previous Assessments page is displayed","stepMatchArguments":[]}]},
   {"pwTestLine":76,"pickleLine":61,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given The user launched the Manan application and logged in successfully","isBg":true,"stepMatchArguments":[]},{"pwStepLine":77,"gherkinStepLine":62,"keywordType":"Context","textWithKeyword":"Given The user is in the Dashboard page","stepMatchArguments":[]},{"pwStepLine":78,"gherkinStepLine":63,"keywordType":"Action","textWithKeyword":"When The user clicks on Subscription plan from Profile link","stepMatchArguments":[]},{"pwStepLine":79,"gherkinStepLine":64,"keywordType":"Outcome","textWithKeyword":"Then Subscription page is displayed","stepMatchArguments":[]}]},
   {"pwTestLine":82,"pickleLine":66,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given The user launched the Manan application and logged in successfully","isBg":true,"stepMatchArguments":[]},{"pwStepLine":83,"gherkinStepLine":67,"keywordType":"Context","textWithKeyword":"Given The user is in the Dashboard page","stepMatchArguments":[]},{"pwStepLine":84,"gherkinStepLine":68,"keywordType":"Action","textWithKeyword":"When The user clicks on Log out from Profile link on the top","stepMatchArguments":[]},{"pwStepLine":85,"gherkinStepLine":69,"keywordType":"Outcome","textWithKeyword":"Then User is successfully logged out","stepMatchArguments":[]}]},
+  {"pwTestLine":88,"pickleLine":71,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given The user launched the Manan application and logged in successfully","isBg":true,"stepMatchArguments":[]},{"pwStepLine":89,"gherkinStepLine":72,"keywordType":"Context","textWithKeyword":"Given The user signed in to his premium account using Google Sign in","stepMatchArguments":[]},{"pwStepLine":90,"gherkinStepLine":73,"keywordType":"Action","textWithKeyword":"When The user navigates to the Dashboard page","stepMatchArguments":[]},{"pwStepLine":91,"gherkinStepLine":74,"keywordType":"Outcome","textWithKeyword":"Then Every blocks and link in the dashboard page are displayed properly for the Premium user","stepMatchArguments":[]}]},
+  {"pwTestLine":94,"pickleLine":76,"tags":[],"steps":[{"pwStepLine":7,"gherkinStepLine":4,"keywordType":"Context","textWithKeyword":"Given The user launched the Manan application and logged in successfully","isBg":true,"stepMatchArguments":[]},{"pwStepLine":95,"gherkinStepLine":77,"keywordType":"Context","textWithKeyword":"Given The new user signed to Manan application","stepMatchArguments":[]},{"pwStepLine":96,"gherkinStepLine":78,"keywordType":"Action","textWithKeyword":"When The user navigates to the Dashboard page","stepMatchArguments":[]},{"pwStepLine":97,"gherkinStepLine":79,"keywordType":"Outcome","textWithKeyword":"Then The graph under Analysis Usage shows the graph properly for new user","stepMatchArguments":[]}]},
 ]; // bdd-data-end

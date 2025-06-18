@@ -42,12 +42,12 @@ class PageFooterPage {
     }
 
     async checkaboutuslink(){
-        await expect(this.numpyninja).toBeVisible;
-        await expect(this.aboutuspage).toBeVisible;
-        await expect(this.whoarewe).toBeVisible;
-        await expect(this.whatdowedo).toBeVisible;
-        await expect(this.whatweworkon).toBeVisible;
-        await expect( this.numpyninjafooter).toBeVisible;
+        await expect(this.numpyninja).toBeVisible();
+        await expect(this.aboutuspage).toBeVisible();
+        await expect(this.whoarewe).toBeVisible();
+        await expect(this.whatdowedo).toBeVisible();
+        await expect(this.whatweworkon).toBeVisible();
+        await expect( this.numpyninjafooter).toBeVisible();
     }
 
     async clickbloglink(){
@@ -55,8 +55,8 @@ class PageFooterPage {
     }
 
      async checkbloglink(){
-        await expect(this.latestblogposts).toBeVisible;
-        await expect(this.diveintotext).toBeVisible;
+        await expect(this.latestblogposts).toBeVisible();
+        await expect(this.diveintotext).toBeVisible();
      }
 
     async clickcontactuslink(){
@@ -64,11 +64,11 @@ class PageFooterPage {
     }
 
     async checkcontactuslink(){
-        await expect(this.contactustext).toBeVisible;
-        await expect(this.getintouchwithustext).toBeVisible;
-        await expect(this.address).toBeVisible;
-        await expect(this.businesshours).toBeVisible;
-        await expect(this.sendusamessage).toBeVisible;
+        await expect(this.contactustext).toBeVisible();
+        await expect(this.getintouchwithustext).toBeVisible();
+        await expect(this.address).toBeVisible();
+        await expect(this.businesshours).toBeVisible();
+        await expect(this.sendusamessage).toBeVisible();
     }
 
     async clicktermslink(){
@@ -76,11 +76,11 @@ class PageFooterPage {
     }
 
     async checktermslink(){
-        await expect(this.termsofservicepage).toBeVisible;
-        await expect(this.agreementblock).toBeVisible;
-        await expect(this.uselicenceblock).toBeVisible;
-        await expect(this.disclaimerblock).toBeVisible;
-        await expect(this.limitationsblock).toBeVisible;
+        await expect(this.termsofservicepage).toBeVisible();
+        await expect(this.agreementblock).toBeVisible();
+        await expect(this.uselicenceblock).toBeVisible();
+        await expect(this.disclaimerblock).toBeVisible();
+        await expect(this.limitationsblock).toBeVisible();
     }
 
     async clickprivacylink(){
@@ -88,11 +88,11 @@ class PageFooterPage {
     }
 
     async checkprivacylink(){
-        await expect(this.privacypolicy).toBeVisible;
-        await expect(this.information).toBeVisible;
-        await expect(this.useofinformation).toBeVisible;
-        await expect(this.cookiepolicy).toBeVisible;
-        await expect(this.dataprotectionrights).toBeVisible;
+        await expect(this.privacypolicy).toBeVisible();
+        await expect(this.information).toBeVisible();
+        await expect(this.useofinformation).toBeVisible();
+        await expect(this.cookiepolicy).toBeVisible();
+        await expect(this.dataprotectionrights).toBeVisible();
     }
 }
 

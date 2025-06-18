@@ -67,3 +67,13 @@ Scenario: Validate log out
    Given The user is in the Dashboard page
    When The user clicks on Log out from Profile link on the top
    Then User is successfully logged out
+
+Scenario: Validate the Dashboard page when signed in to the premium accoutn through Google Sign in
+   Given The user signed in to his premium account using Google Sign in
+   When The user navigates to the Dashboard page
+   Then Every blocks and link in the dashboard page are displayed properly for the Premium user
+
+Scenario: Validate the Analysis Usage graph shows 0 of 20 for the new user
+   Given The new user signed to Manan application
+   When The user navigates to the Dashboard page
+   Then The graph under Analysis Usage shows the graph properly for new user
