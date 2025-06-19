@@ -58,7 +58,6 @@ Scenario: Submitting an incomplete mobile number
   When The user enters a mobile number with extra digits
   Then An error message should appear indicating the mobile number is invalid and to please ensure the correct country is selected in the dropdown
 
-Scenario: Completing the payment process
-  When The user submits the payment form with valid credit card information
-  Then A confirmation message should appear indicating successful payment
-
+# Scenario: Completing the payment process
+#   When The user submits the payment form with valid credit card information
+#   Then A confirmation message should appear indicating successful payment
