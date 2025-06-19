@@ -17,6 +17,8 @@ export class SigninWindowPage {
     this.signUpTab = page.getByRole('tab', { name: 'Sign Up' });
     this.signInTab = page.getByRole('tab', { name: 'Sign In' });
     this.usernameInput = page.getByRole('textbox', { name: 'Username' });
+    //
+    this.signuptabEmail = page.getByRole('textbox', { name: 'Email Address' })
     this.passwordSignUpInput = page.getByRole('textbox', { name: 'Password', exact: true });
     this.signupPasswordInput = page.locator('#register-password');
     this.signupUsernameInput = page.locator('#register-username');
@@ -58,12 +60,23 @@ export class SigninWindowPage {
     await expect(this.passwordSignUpInput).toBeVisible();
     await expect(this.confirmPasswordInput).toBeVisible();
     await expect(this.createAccountButton).toBeVisible();
+    await expect(this.signuptabEmail).toBeVisible();
   }
 
-  // async signInWithExistingGoogleUser() {
+  /*async signInWithExistingGoogleUser() {
+await page.getByRole('button', { name: 'Sign In' }).click();
+await page.getByRole('tab', { name: 'Sign Up' }).click();
+await page.getByRole('textbox', { name: 'Email Address' }).click();
+await page.getByText('Email Address').click();
+await page.getByRole('textbox', { name: 'Username' }).click();
+await page.getByText('Email Address').click();
+await expect(page.locator('form')).toContainText('Email Address');
+await expect(page.getByRole('textbox', { name: 'Email Address' })).toBeVisible();
+await expect(page.getByText('UsernameEmail')).toBeVisible();
+
   //  await this.continueWithGoogleButton.click();
   //  await this.alreadyGoogleuser.click();
-  // }
+  // } */
  
   async switchToSignUpTab() {
     await this.signUpTab.click();
@@ -128,6 +141,7 @@ export class SigninWindowPage {
     const data = SigninData.existingUser;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(data.username);
+    await this.signuptabEmail.fill(data.email);
     await this.signupPasswordInput.fill(data.password);
     await this.signupconfirmPasswordInput.fill(data.confirmPassword);
     await this.createAccountButton.click();
@@ -142,6 +156,7 @@ export class SigninWindowPage {
     const data = SigninData.mismatchedPasswords;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(data.username);
+    await this.signuptabEmail.fill(data.email);
     await this.signupPasswordInput.fill(data.password);
     await this.signupconfirmPasswordInput.fill(data.confirmPassword);
     await this.createAccountButton.click();
@@ -151,6 +166,7 @@ export class SigninWindowPage {
     const data = SigninData.blankConfirmPassword;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(data.username);
+    await this.signuptabEmail.fill(data.email);
     await this.signupPasswordInput.fill(data.password);
     await this.createAccountButton.click();
   }
@@ -159,6 +175,7 @@ export class SigninWindowPage {
     const data = SigninData.blankPasswords;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(data.username);
+    await this.signuptabEmail.fill(data.email);
     await this.createAccountButton.click();
   }
 
@@ -166,6 +183,7 @@ export class SigninWindowPage {
     const data = SigninData.validSignup;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(data.username);
+    await this.signuptabEmail.fill(data.email);
     await this.signupPasswordInput.fill(data.password);
     await this.signupconfirmPasswordInput.fill(data.confirmPassword);
     await this.createAccountButton.click();
@@ -185,7 +203,7 @@ export class SigninWindowPage {
 
   async validSigninwithexistingusernamePassword() {
     const data = SigninData.existingUser;
-    await this.signInuswernameInput.fill(data.username);
+    await this.usernameInput.fill(data.username);
     await this.signInPasswordInput.fill(data.password);
     await this.signInButton.click();
   }
@@ -193,12 +211,14 @@ export class SigninWindowPage {
     const data = SigninData.validSignup;
     // Generate a random username by appending a random number
     const randomUsername = `${data.username}_${Math.floor(Math.random() * 100000)}`;
+    const randomEmail = `teamharmony_${Math.floor(Math.random() * 100000)}@example.com`;
     await this.switchToSignUpTab();
     await this.signupUsernameInput.fill(randomUsername);
-    await this.signupPasswordInput.fill(data.password);
+    await this.signuptabEmail.fill(randomEmail);
+    await this.passwordSignUpInput.fill(data.password);
     await this.signupconfirmPasswordInput.fill(data.confirmPassword);
     await this.createAccountButton.click(); 
-    console.log(`Signed up with random username: ${randomUsername}`);
+    console.log(`Signed up with random username: ${randomUsername} and email: ${randomEmail}`);
   }
 
   async signintomanan() {
@@ -209,3 +229,4 @@ export class SigninWindowPage {
   }
 
 }
+module.exports = { SigninWindowPage };

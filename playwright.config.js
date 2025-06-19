@@ -33,12 +33,17 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
  reporter: [["list"],["html"], ["allure-playwright",{outputFolder:'results'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+ timeout: 60000, // sets default timeout for each test to 60 seconds
   use: {
+    actionTimeout: 20000,
+    navigationTimeout: 30000, // sets default timeout for navigation actions to 30 seconds
     /* Base URL to use in actions like await page.goto('/'). */
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    // screenshot: 'only-on-failure',
+    // video:'retain-on-failure',
      headless: false, // launch browser with GUI for debugging
 
   },
