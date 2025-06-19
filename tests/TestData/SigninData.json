@@ -1,12 +1,15 @@
 {
   "mismatchedPasswords": {
     "username": "Team Harmony",
+    "email": "meenaatesting@gmail.com",
     "password": "GirlPower123!",
     "confirmPassword": "Girl123!",
     "error": "Passwords do not match"
   },
   "existingUser": {
     "username": "Team Harmony",
+    "email": "meenaatesting@gmail.com",
+    "emailfromapp":"testuserem286@gmail.com",
     "password": "GirlPower123!",
     "confirmPassword": "GirlPower123!",
     "error": "Registration Failed Username already exists",
@@ -20,11 +23,13 @@
   },
    "blankConfirmPassword": {
     "username": "Team Harmony",
+    "email": "meenaatesting@gmail.com",
     "password": "GirlPower123!",
     "error": "Please fill in all fields"
  },
   "blankPasswords": {
     "username": "Team Harmony",
+    "email": "meenaatesting@gmail.com",
     "error": "Please fill in all fields"
  },
   "InvalidUsername": {
@@ -38,7 +43,7 @@
      "error": "Incorrect Password."
   },
   "googleUser": {
-    "email": "nnplaywright1@gmail.com",
+    "email": "meenaatesting@gmail.com",
     "password": "PlayWright1",
     "success": "Login successful"
   }

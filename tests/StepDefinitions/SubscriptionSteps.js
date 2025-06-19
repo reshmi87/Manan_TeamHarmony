@@ -18,6 +18,8 @@ Given('The user is on the Subscription Page', async ({page}) => {
 
 When('The user clicks Get Started Free button', async ({}) => {
       await subscriptionPage.clickGetStartedFree();
+      console.log('User clicks Get started Free Button')
+        
 });
 
 Then('The user should see a pop-up window prompting sign-in', async ({}) => {
@@ -26,6 +28,7 @@ Then('The user should see a pop-up window prompting sign-in', async ({}) => {
 
 When('The user clicks Subscribe now button', async ({}) => {
       await subscriptionPage.clickSubscribeNow();
+      console.log('User clicks Subscribe now button')
 });
 
 Then('The user should get the pop-up toast notification window with login button to sign-in', async ({}) => {

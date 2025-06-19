@@ -17,6 +17,7 @@ export class HomePage {
         this.welcomeHeading = page.getByRole('heading', { name: 'Welcome to MANAN' });
         this.signInText = page.getByText('Sign in to access your');    
     }   
+
     async navigateToHomePage() {
        await this.page.goto(process.env.appurl);
     }
@@ -28,35 +29,45 @@ export class HomePage {
     async clickMananLogo() {
         await this.MananLogo.click();
     }
+
     async clickHomeButton() {
         await this.Homebutton.click();
     }
+
     async verifyHomepage() {
         await expect(this.navigationMenu).toBeVisible();
         await expect(this.MananLogo).toBeVisible();
         await expect(this.Homebutton).toBeVisible();
     }
+
     async clickTryNowLink() {
         await this.tryNowLink.click();
-    }   
+    }  
+
     async clickPricingLink() {
         await this.pricingLink.click();
     }
+
     async clickSignInLink() {
         await this.signInLink.click();
     }
+
     async clickTryForFreeButton() {
         await this.tryForFreeButton.click();
     }
+
     async clickForMedicalProfessionalsButton() {
         await this.forMedicalProfessionalsButton.click();
     }
+    
     async clickStartMedicalTriageAssessmentButton() {
         await this.startMedicalTriageAssessmentButton.click();
     }
+
     async clickViewPricingPlansButton() {
         await this.viewPricingPlansButton.click();
     }
+
     async verifyNavigationMenu() {
         await this.navigationMenu.waitFor({ state: 'visible' });
         await expect(this.MananLogo).toBeVisible();
@@ -65,12 +76,14 @@ export class HomePage {
         await expect(this.pricingLink).toBeVisible();
         await expect(this.signInLink).toBeVisible();   
     }
+
     async verifyActionButtons() {
         await expect(this.tryForFreeButton).toBeVisible();
         await expect(this.forMedicalProfessionalsButton).toBeVisible();
         await expect(this.startMedicalTriageAssessmentButton).toBeVisible();
         await expect(this.viewPricingPlansButton).toBeVisible();
     }
+
     async verifyPopUpWindow() {
         await expect(this.popwindow).toBeVisible();
         await expect(this.welcomeHeading).toContainText('Welcome to MANAN');
@@ -78,3 +91,4 @@ export class HomePage {
     }
 
 }
+module.exports = { HomePage };
