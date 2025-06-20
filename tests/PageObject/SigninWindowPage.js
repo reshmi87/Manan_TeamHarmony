@@ -48,6 +48,10 @@ export class SigninWindowPage {
   async clickContinueWithGoogle() {
     await this.signInWithGoogle(SigninData.googleUser.email, SigninData.googleUser.password);
   }
+  
+  async premiumUserlogin() {
+    await this.signInWithGoogle(SigninData.premiumUser.email, SigninData.premiumUser.password)
+  }
 
   async verifySignInModal() {
     await expect(this.continueWithGoogleButton).toBeVisible();
@@ -219,14 +223,6 @@ await expect(page.getByText('UsernameEmail')).toBeVisible();
     await this.signupconfirmPasswordInput.fill(data.confirmPassword);
     await this.createAccountButton.click(); 
     console.log(`Signed up with random username: ${randomUsername} and email: ${randomEmail}`);
-  }
-
-  async signintomanan() {
-    await this.signInButton.click();
-    await this.emailOrPhoneInput.fill(process.env.username);
-    await this.passwordInput.fill(process.env.password);
-    await this.signInButton.click();
-  }
-
+  }   
 }
 module.exports = { SigninWindowPage };
