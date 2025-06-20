@@ -1,192 +1,233 @@
-// import { createBdd } from "playwright-bdd";
+import { createBdd } from 'playwright-bdd';
+const { expect } = require('@playwright/test');
+const {PatientDataPage} = require('../PageObject/PatientDataPage.js');
+const {SigninWindowPage} = require('../PageObject/SigninWindowPage.js');
+const path = require('path');
+const { Given, When, Then } = createBdd();
 
-// const{Given,When,Then} = createBdd();
-
-// Given('The user is on the Assessment page of the Manan medical triage system after sign in', async ({}) => {
-//   // Step: Given The user is on the Assessment page of the Manan medical triage system after sign in
-//   // From: tests\Features\PatientData.feature:4:3
-// });
-
-// Given('The user navigates to the Assessment page after login', async ({}) => {
-//   // Step: Given The user navigates to the Assessment page after login
-//   // From: tests\Features\PatientData.feature:8:5
-// });
-
-// When('The user fills in all required information, uploads a valid PDF test report, and clicks the {string} button', async ({}, arg) => {
-//   // Step: When The user fills in all required information, uploads a valid PDF test report, and clicks the "Analyze Case" button
-//   // From: tests\Features\PatientData.feature:9:5
-// });
-
-// Then('The user verifies the triage recommendations are displayed correctly', async ({}) => {
-//   // Step: Then The user verifies the triage recommendations are displayed correctly
-//   // From: tests\Features\PatientData.feature:10:5
-// });
-
-// When('The user opens the gender dropdown and selects {string}', async ({}, arg) => {
-//   // Step: When The user opens the gender dropdown and selects "Male"
-//   // From: tests\Features\PatientData.feature:15:5
-// });
-
-// Then('The user verifies the selected gender is {string}', async ({}, arg) => {
-//   // Step: Then The user verifies the selected gender is "Male"
-//   // From: tests\Features\PatientData.feature:16:5
-// });
-
-// When('The user opens the gender dropdown again and selects {string}', async ({}, arg) => {
-//   // Step: When The user opens the gender dropdown again and selects "Female"
-//   // From: tests\Features\PatientData.feature:17:5
-// });
-
-// Then('The user verifies the gender options {string} and {string} are visible in the dropdown', async ({}, arg, arg1) => {  
-//   // Step: And The user verifies the gender options "Male" and "Female" are visible in the dropdown
-//   // From: tests\Features\PatientData.feature:19:5
-// });
-
-// When('The user uploads a valid PDF test report', async ({}) => {
-//   // Step: When The user uploads a valid PDF test report
-//   // From: tests\Features\PatientData.feature:24:5
-// });
+let patientDataPage;
+let signinWindowPage;
 
 
-// Then('The user verifies the vital signs and lab values fields are populated correctly', async ({}) => {
-//   // Step: Then The user verifies the vital signs and lab values fields are populated correctly
-//   // From: tests\Features\PatientData.feature:25:5
-// });
 
-// When('The user manually enters vital signs and lab values', async ({}) => {
-//   // Step: When The user manually enters vital signs and lab values
-//   // From: tests\Features\PatientData.feature:30:5
-// });
+Given('The user is on the Assessment page of the Manan medical triage system after sign in', async ({page}) => { 
+    signinWindowPage = new SigninWindowPage(page);
+    await signinWindowPage.openSignInModal();
+    await signinWindowPage.premiumUserlogin();     
+});
 
-// Then('The user verifies the values are saved correctly', async ({}) => {
-//   // Step: Then The user verifies the values are saved correctly
-//   // From: tests\Features\PatientData.feature:31:5
-// });
+Given('The user navigates to the Assessment page after login', async ({page}) => {   
+    await page.getByRole('button', { name: 'Dashboard' }).click();
+    await page.getByRole('button', { name: 'Start New Assessment' }).click();
+ 
+});
 
-// When('The user submits the form without entering patient age', async ({}) => {
-//   // Step: When The user submits the form without entering patient age
-//   // From: tests\Features\PatientData.feature:36:5
-// });
+When('The user fills in all required information, uploads a valid PDF test report, and clicks the {string} button', async ({page}, buttonLabel) => {    
+    patientDataPage = new PatientDataPage(page);
+    await patientDataPage.CompleteForm();
+    switch (buttonLabel) {
+      case 'Analyze Case':
+        await patientDataPage.clickAnalyzeCase();
+        break;
+      case 'Share Analysis':
+        await patientDataPage.clickShareAnalysis();
+        break;
+      case 'Ask for Further Analysis':
+        await patientDataPage.clickFurtherAnalysis();
+        break;
+      default:
+        throw new Error(`Button with label "${buttonLabel}" is not supported`);
+    }
+  console.log(`Clicked "${buttonLabel}" successfully`);
+});
 
-// Then('The user verifies a validation error is shown for missing patient age', async ({}) => {
-//   // Step: Then The user verifies a validation error is shown for missing patient age
-//   // From: tests\Features\PatientData.feature:37:5
-// });
+Then('The user verifies the triage recommendations are displayed correctly', async ({}) => {
+  await patientDataPage.verifyTriageRecommendationsVisible();
+});
 
-// When('The user submits the form without selecting gender', async ({}) => {
-//   // Step: When The user submits the form without selecting gender
-//   // From: tests\Features\PatientData.feature:42:5
-// });
+When('The user opens the gender dropdown and selects {string}', async ({page}, gender) => {
+    patientDataPage = new PatientDataPage(page);
+    await patientDataPage.SelectGender(gender); 
+});
 
-// Then('The user verifies a validation error is shown for missing gender', async ({}) => {
-//   // Step: Then The user verifies a validation error is shown for missing gender
-//   // From: tests\Features\PatientData.feature:43:5
-// });
+Then('The user verifies the selected gender is {string}', async ({page}, expectedGender) => {
+     patientDataPage = new PatientDataPage(page);    
+    const selectedGender = await patientDataPage.GenderDropdown.textContent();
+    expect(selectedGender.trim()).toContain(expectedGender);   
+});
 
-// When('The user submits the form without entering chief complaint', async ({}) => {
-//   // Step: When The user submits the form without entering chief complaint
-//   // From: tests\Features\PatientData.feature:48:5
-// });
+When('The user opens the gender dropdown again and selects {string}', async ({page}, gender) => {
+     patientDataPage = new PatientDataPage(page); 
+    await patientDataPage.SelectGender(gender);  
+});
 
-// Then('The user verifies a validation error is shown for missing chief complaint', async ({}) => {
-//   // Step: Then The user verifies a validation error is shown for missing chief complaint
-//   // From: tests\Features\PatientData.feature:49:5
-// });
-// When('The user submits the form without entering symptom description', async ({}) => {
-//   // Step: When The user submits the form without entering symptom description
-//   // From: tests\Features\PatientData.feature:54:5
-// });
+Then('The user verifies the gender options {string} and {string} are visible in the dropdown', async ({page}, option1, option2) => {  
+    patientDataPage = new PatientDataPage(page);
+    await patientDataPage.GenderDropdown.click();  
+    const maleVisible = await patientDataPage.MaleOption.isVisible();
+    const femaleVisible = await patientDataPage.FemaleOption.isVisible();
+    expect(maleVisible).toBeTruthy();
+    expect(femaleVisible).toBeTruthy();  
+});
 
-// Then('The user verifies a validation error is shown for missing symptom description', async ({}) => {
-//   // Step: Then The user verifies a validation error is shown for missing symptom description
-//   // From: tests\Features\PatientData.feature:55:5
-// });
+When('The user uploads a valid PDF test report', async ({page}) => { 
+    patientDataPage = new PatientDataPage(page);
+    const pdfPath = 'tests/Sample reports/CBC-sample 1.pdf';
+    await patientDataPage.uploadTestReport(pdfPath); 
+});
 
-// When('The user uploads a test report with a .docx file extension', async ({}) => {
-//   // Step: When The user uploads a test report with a .docx file extension
-//   // From: tests\Features\PatientData.feature:60:5
-// });
+Then('The user verifies the vital signs and lab values fields are populated correctly', async ({}) => { 
+    
+    const vitalsText = await patientDataPage.VitalSignField.inputValue();
+    expect(vitalsText).toMatch(/AI ANALYSIS:/i);
+    expect(vitalsText.length).toBeGreaterThan(20);  
+});
 
-// Then('The user verifies a validation error popup: {string} is shown', async ({}, arg) => {
-//   // Step: Then The user verifies a validation error popup: "Failed to parse blood report. Please enter values manually" is shown    
-//   // From: tests\Features\PatientData.feature:61:5
-// });
+When('The user manually enters vital signs and lab values', async ({page}) => {
+     patientDataPage = new PatientDataPage(page);  
+    await patientDataPage.clickVitalSigns();  
+});
 
-// Given('The user has input all the required information on the Assessment page', async ({}) => {
-//   // Step: Given The user has input all the required information on the Assessment page
-//   // From: tests\Features\PatientData.feature:64:5
-// });
+Then('The user verifies the values are saved correctly', async ({}) => {  
+    await patientDataPage.verifyVitalsInTextarea();  
+});
 
-// When('The user clicks the Analyze Case button', async ({}) => {
-//   // Step: When The user clicks the Analyze Case button
-//   // From: tests\Features\PatientData.feature:65:5
-// });
+When('The user submits the form without entering patient age', async ({page}) => {
+    patientDataPage = new PatientDataPage(page);   
+    await patientDataPage.emptyAge();    
+    await patientDataPage.clickAnalyzeCase(); // Submit form by clicking Analyze Case 
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Triage Level', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Triage Level
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+Then('The user verifies a validation error is shown for missing patient age', async ({page}) => { 
+    await patientDataPage.AgeMissing(); // This will assert the error is visible
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven TOP {int}-{int} POSSIBLE DIAGNOSES', async ({}, arg, arg1) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven TOP 3-5 POSSIBLE DIAGNOSES        
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+When('The user submits the form without selecting gender', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    await patientDataPage.withoutGender();
+    await patientDataPage.clickAnalyzeCase();
+});
 
-// Given('The user has input all the required information on the Assessment page', async ({}) => {
-//   // Step: Given The user has input all the required information on the Assessment page
-//   // From: tests\Features\PatientData.feature:64:5
-// });
+Then('The user verifies a validation error is shown for missing gender', async ({page}) => {
+    await patientDataPage.GenderMissing();
+});
 
-// When('The user clicks the Analyze Case button', async ({}) => {
-//   // Step: When The user clicks the Analyze Case button
-//   // From: tests\Features\PatientData.feature:65:5
-// });
+When('The user submits the form without entering chief complaint', async ({page}) => { 
+    patientDataPage = new PatientDataPage(page); 
+    await patientDataPage.emptyChiefcomplaints();
+    await patientDataPage.clickAnalyzeCase(); // Submitting without chief complaint
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Triage Level', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Triage Level
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+Then('The user verifies a validation error is shown for missing chief complaint', async ({}) => {  
+   await patientDataPage.ChiefComplaintMissing();
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven TOP {int}-{int} POSSIBLE DIAGNOSES', async ({}, arg, arg1) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven TOP 3-5 POSSIBLE DIAGNOSES        
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+When('The user submits the form without entering symptom description', async ({page}) => {
+    patientDataPage = new PatientDataPage(page);   
+    await patientDataPage.emptySymptomdescription();
+    await patientDataPage.clickAnalyzeCase(); // Submitting without symptoms
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Key clinical concerns and risk factors', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Key clinical concerns and risk factors
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+Then('The user verifies a validation error is shown for missing symptom description', async ({}) => { 
+    await patientDataPage.SymptomsMissing();
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Immediate actions\\/interventions needed', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Immediate actions/interventions needed
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+When('The user submits the form without entering vital signs', async ({page}) => {  
+    patientDataPage = new PatientDataPage(page);   
+    await patientDataPage.NoVitalSigns();
+    await patientDataPage.clickAnalyzeCase();
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Recommended diagnostic tests', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Recommended diagnostic tests      
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+Then('The user verifies a validation error is shown for missing vital signs', async ({}) => {  
+   await patientDataPage.VitalSignMissing();
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Specialist referral recommendations', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Specialist referral recommendations
-//   // From: tests\Features\PatientData.feature:66:5
-// });
+When('The user submits the form without filling any fields', async ({page}) => {
+    patientDataPage = new PatientDataPage(page);  
+    await patientDataPage.clickAnalyzeCase();
+});
 
-// Then('The system displays an AI-generated Analysis report containing the following seven Warning signs requiring escalation', async ({}) => {
-//   // Step: Then The system displays an AI-generated Analysis report containing the following seven Warning signs requiring escalation
-//   // From: tests\Features\PatientData.feature:66:5
-// });
-// Given('The user completed a case and AI analysis is displayed', async ({}) => {
-//   // Step: Given The user completed a case and AI analysis is displayed
-//   // From: tests\Features\PatientData.feature:78:5
-// });
+Then('The user verifies validation errors for all required fields are shown', async ({}) => { 
+    await patientDataPage.AgeMissing();
+    await patientDataPage.GenderMissing();
+    await patientDataPage.ChiefComplaintMissing();
+    await patientDataPage.SymptomsMissing();
+    await patientDataPage.VitalSignMissing();
+});
 
-// When('The user click the {string} button', async ({}, arg) => {
-//   // Step: When The user click the "Share Analysis" button
-//   // From: tests\Features\PatientData.feature:79:5
-// });
+When('The user uploads a test report with a docx file extension', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    const filePath = path.resolve('tests/Sample reports/HyperThyroid_Report_final.docx');
+    await patientDataPage.uploadInvalidTestReport(filePath);
+});
 
-// Then('The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.', async ({}) => {
-//   // Step: Then The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.
-//   // From: tests\Features\PatientData.feature:80:5
-// });
+Then('The user verifies a validation error popup: {string} is shown', async ({page},arg) => {
+    await patientDataPage.verifyValidationErrorPopup();
+});
+
+When('The user uploads a test report with a jpg file extension', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    const filePath = path.resolve('tests/Sample reports/sample-invalid.jpeg');
+    await patientDataPage.uploadInvalidTestReport(filePath);
+});
+
+When('The user uploads a test report with a txt file extension', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    const filePath = path.resolve('tests/Sample reports/sample-invalid.txt');
+    await patientDataPage.uploadInvalidTestReport(filePath);
+});
+
+Given('The user completes the patient assessment form with valid data', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    await patientDataPage.NoVitalSigns();
+    await patientDataPage.clickVitalSigns();
+});
+
+When('The case is analyzed using the AI engine', async ({}) => {
+    await patientDataPage.clickAnalyzeCase();
+});
+
+Then('The report should validate the presence of all required clinical sections', async ({}) => {
+
+   // Wait for the AI analysis section to appear
+    await expect(patientDataPage.AIAnalysis).toBeVisible({ timeout: 30000 });
+    // Wait for the final section to ensure full report load
+    await expect(patientDataPage.page.getByText('Warning signs requiring escalation', { exact: false })).toBeVisible({ timeout: 30000 });
+    // Now verify all expected sections
+    const expectedSections = [
+    'Triage Level',
+    'TOP 3-5 POSSIBLE DIAGNOSES',
+    'Key clinical concerns and risk factors',
+    'Immediate actions/interventions needed',
+    'Recommended diagnostic tests',
+    'Specialist referral recommendations',
+    'Warning signs requiring escalation'
+    ];
+    for (const section of expectedSections) {
+    await expect(patientDataPage.page.getByText(section, { exact: false })).toBeVisible({ timeout: 10000 });
+    }
+});
+
+Given('The user completed a case and AI analysis is displayed', async ({page}) => {
+    patientDataPage = new PatientDataPage(page); 
+    await patientDataPage.NoVitalSigns();
+    await patientDataPage.clickVitalSigns();    
+    // Click Analyze Case and verify AI analysis results are visible
+    await patientDataPage.clickAnalyzeCase();
+    await patientDataPage.verifyTriageRecommendationsVisible();
+});
+
+When('The user click the {string} button', async ({page}, buttonName) => {
+    await page.getByRole('button', { name: 'Share Analysis' }).click();
+    await patientDataPage.verifyTriageRecommendationsVisible(); // or similar method
+    await patientDataPage.clickShareAnalysis();  
+});
+
+Then('The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.', async ({page}) => {
+    // Wait for Share options screen to appear and generate PDF      
+    // await patientDataPage.clickShareAnalysis();
+    await patientDataPage.verifypdfSuccessPopup();
+    // Verify the success popup text
+    //await page.getByRole('button', { name: 'Share Analysis' }).click(); 
+    await expect(page.getByRole('status')).toContainText('PDF Generated');     
+});
