@@ -1,5 +1,5 @@
 const { expect } = require('@playwright/test');
-const PatientData = require('../../TestData/PatientData.json');
+const PatientData = require('../TestData/PatientData.json');
 
 
 export class PatientDataPage {
