@@ -1,0 +1,12 @@
+{
+    "CompleteForm": {
+        "Age": "52",
+        "CheifComplaints": "Fever",
+        "SymptompsDesc": "Fever and Body pain"
+    },
+
+    "Vitals": {
+        "vitalsigns":"BP: 120/80 HR: 72\nRR: 16 Temp: 98.6 SpO2: 98%"
+    }
+      
+}
