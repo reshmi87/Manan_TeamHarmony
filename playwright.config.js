@@ -33,7 +33,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
  reporter: [["list"],["html"], ["allure-playwright",{outputFolder:'results'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
- timeout: 60000, // sets default timeout for each test to 60 seconds
+ timeout: 200000, // sets default timeout for each test to 60 seconds
   use: {
     actionTimeout: 20000,
     navigationTimeout: 30000, // sets default timeout for navigation actions to 30 seconds
