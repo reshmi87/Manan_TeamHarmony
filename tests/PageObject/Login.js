@@ -36,8 +36,8 @@ class Login {
 
     async newusersignin() {
         await this.signin.click();
-        await this.username.fill(SigninData.existingUser.username);
-        await this.password.fill(SigninData.existingUser.password);
+        await this.username.fill(SigninData.newUser.username);
+        await this.password.fill(SigninData.newUser.password);
         await this.signinbutton.click();
     }
 }

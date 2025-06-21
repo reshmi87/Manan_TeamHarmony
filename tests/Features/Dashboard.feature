@@ -77,3 +77,8 @@ Scenario: Validate the Analysis Usage graph shows 0 of 20 for the new user
    Given The new user signed to Manan application
    When The user navigates to the Dashboard page
    Then The graph under Analysis Usage shows the graph properly for new user
+
+Scenario: Validate Manan link is functional from the Dashboard page
+   Given The user is in the Dashboard Page
+   When The user clicks on the link Manan at the top in Dashboard
+   Then Self Assessment page is displayed when the clicked on Manan from Dashboard Page

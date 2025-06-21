@@ -9,9 +9,7 @@ Before(async({page})=>{
 })
 
 After(async({page})=>{
-   await allure.attachment("Team Harmony: Text file", "This is the file content.", ContentType.TEXT);
 
-  // Capture and attach screenshot (from Playwright)
   const screenshotBuffer = await page.screenshot();
  await allure.attachment("Team Harmony: Screenshot", screenshotBuffer, ContentType.PNG);
 

@@ -29,3 +29,8 @@ Scenario: Validation of the Current Plan block in the Subscription page for Newl
     Given A New user logged in to the Manan Application
     When The user clicks on the Subscription Plans from the Profile at the top
     Then Verify the Current Plan shows it is Free and a Upgrade to Premium button is displayed
+
+Scenario: Validate Manan link is functional from the Subscription page
+    Given The user is in the Subscription Page
+    When The user clicks on the link Manan at the top in Subscription page
+    Then Self Assessment page is displayed when the clicked on Manan from Subscription Page

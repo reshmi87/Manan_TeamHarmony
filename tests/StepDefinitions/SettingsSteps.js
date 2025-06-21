@@ -6,14 +6,10 @@ const SettingsPage = require("../PageObject/SettingsPage.js");
 
 const{Given,When,Then} = createBdd();
 
-// When('The user clicks on the Update settings link from Account settings block', async ({page}) => {
-//     const dashboard = new DashboardPage(page);
-//     dashboard.clickupdatesettingslink();
-// });
-
 Then('User profile information with email id is displayed in the User Profile section in the settings page', async ({page}) => {
   const setting = new SettingsPage(page);
   await setting.checkuserprofile();
+  await page.pause();
 });
 
 Then('Notification preferences block with the notification settings is displayed', async ({page}) => {
@@ -64,4 +60,20 @@ Then('All the information are displayed properly for the user signed in through 
   const setting = new SettingsPage(page);
   await setting.checkuserprofile();
   await setting.checknotificationpreference();
+});
+
+Given('The user is in the Settings Page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.launchdashboard();
+  await dashboard.clickupdatesettingslink();
+});
+
+When('The user clicks on the link Manan at the top in Settings page', async ({page}) => {
+  const setting = new SettingsPage(page);
+  await setting.clickManan();
+});
+
+Then('Self Assessment page is displayed when the clicked on Manan from Settings Page', async ({page}) => {
+  const setting = new SettingsPage(page);
+  await setting.checkaftermananclick();
 });
