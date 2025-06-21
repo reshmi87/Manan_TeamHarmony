@@ -27,3 +27,8 @@ Scenario: Validation of the Settings page through Google Account Signin
     Given The user logged in as Google user
     When User Navigates to the Settings page
     Then All the information are displayed properly for the user signed in through Google Account
+
+Scenario: Validate Manan link is functional from the Settings page
+    Given The user is in the Settings Page
+    When The user clicks on the link Manan at the top in Settings page
+    Then Self Assessment page is displayed when the clicked on Manan from Settings Page

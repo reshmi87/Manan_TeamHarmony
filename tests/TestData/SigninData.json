@@ -50,5 +50,11 @@
   "premiumUser":{
     "email":"nnplaywright1@gmail.com",
     "password": "PlayWright1"
+  },
+
+   "newUser": {
+    "username": "Newuser",
+    "password": "GirlPower123!",
+    "success": "Login successful"
   }
 }

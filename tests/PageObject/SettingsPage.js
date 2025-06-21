@@ -24,6 +24,9 @@ class SettingsPage {
         this.dashboard= page.getByRole('button', { name: 'Dashboard' });
         this.settingslink = page.getByRole('button', { name: 'Update settings →' });
 
+        this.manan = page.getByRole('link', { name: 'Manan' });
+        this.mananhomepage = page.getByText('(Multi-Algorithm Navigation');
+
     }
 
     async checkuserprofile(){
@@ -66,6 +69,14 @@ class SettingsPage {
         await this.emailnotificationtoggle.click();
         await this.appnotificationtoggle.click();
         await this.notificationsave.click();
+    }
+
+    async clickManan(){
+        await this.manan.click();
+    }
+
+    async checkaftermananclick(){
+        await expect(this.mananhomepage).toBeVisible();
     }
 }
 

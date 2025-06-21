@@ -162,3 +162,18 @@ Then('The graph under Analysis Usage shows the graph properly for new user', asy
   const dashboard = new DashboardPage(page);
   await dashboard.checkgraphfornewuser();
 });
+
+Given('The user is in the Dashboard Page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.launchdashboard();
+});
+
+When('The user clicks on the link Manan at the top in Dashboard', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.clickManan();
+});
+
+Then('Self Assessment page is displayed when the clicked on Manan from Dashboard Page', async ({page}) => {
+  const dashboard = new DashboardPage(page);
+  await dashboard.checkaftermananclick();
+});

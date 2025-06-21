@@ -49,3 +49,20 @@ Then('Verify the Current Plan shows it is Free and a Upgrade to Premium button i
     const subscriptionpage = new SubscriptionAuthenticatedPage(page);
     await subscriptionpage.NewuserCurrentPlanblock();
 });
+
+Given('The user is in the Subscription Page', async ({page}) => {
+    const loginpage = new Login(page);
+    await loginpage.Premiumusersignin();
+    const subscriptionpage = new SubscriptionAuthenticatedPage(page);
+    await subscriptionpage.GotoSubscriptionpage();
+});
+
+When('The user clicks on the link Manan at the top in Subscription page', async ({page}) => {
+    const subscriptionpage = new SubscriptionAuthenticatedPage(page);
+    await subscriptionpage.clickManan();
+});
+
+Then('Self Assessment page is displayed when the clicked on Manan from Subscription Page', async ({page}) => {
+    const subscriptionpage = new SubscriptionAuthenticatedPage(page);
+    await subscriptionpage.checkaftermananclick();
+});

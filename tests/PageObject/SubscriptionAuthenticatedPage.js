@@ -43,6 +43,9 @@ class SubscriptionAuthenticatedPage {
 
         this.newusercurrentplan = page.getByRole('heading', { name: 'Current Plan: Free' });
         this.newuserupgradebutton = page.getByRole('button', { name: 'Upgrade to Premium' });
+
+        this.manan = page.getByRole('link', { name: 'Manan' });
+        this.mananhomepage = page.getByText('(Multi-Algorithm Navigation');
 }
 
     async GotoSubscriptionpage(){
@@ -110,10 +113,12 @@ class SubscriptionAuthenticatedPage {
         await expect(this.currentplanfornewuserbutton).toBeVisible();
         const isEnabled = await this.currentplanfornewuserbutton.isEnabled();
         expect(isEnabled).toBe(false); 
-        if(!isEnabled)
+        if(!isEnabled){
         console.log('Current Plan is currently disabled');
-        else
+        }
+        else{
         console.log('Current Plan is enabled');
+        }
     }
 
     async NewuserPremiumPlanblock(){
@@ -139,6 +144,14 @@ class SubscriptionAuthenticatedPage {
         const isEnabled = await this.newuserupgradebutton.isEnabled();
         expect(isEnabled).toBe(true); 
         console.log('Upgrade to Premium button is enabled:', isEnabled);
+    }
+
+    async clickManan(){
+        await this.manan.click();
+    }
+
+    async checkaftermananclick(){
+        await expect(this.mananhomepage).toBeVisible();
     }
 }
 module.exports=SubscriptionAuthenticatedPage;

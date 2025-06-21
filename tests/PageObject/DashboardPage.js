@@ -1,5 +1,3 @@
-// exports.Dashboard = class Dashboard {
-
 const { expect } = require('@playwright/test');
 
 class DashboardPage {
@@ -58,6 +56,9 @@ class DashboardPage {
 
         //FirstTimeuser
         this.newusergraph = page.locator('div').filter({ hasText: /^0of 20$/ }).nth(2);
+
+        this.manan = page.getByRole('link', { name: 'Manan' });
+        this.mananhomepage = page.getByText('(Multi-Algorithm Navigation');
     }
 
     async checkifselfassessmentpage(){
@@ -148,6 +149,7 @@ class DashboardPage {
         await expect(this.profilelogout).toBeVisible();
         const email = await this.profileemailid.textContent();
         console.log("Profile belongs to: "+email);
+        // logToAllure("Profile belongs to: "+email);
     }
 
     async clickprofilesettings(){
@@ -206,6 +208,14 @@ class DashboardPage {
 
     async checkgraphfornewuser(){
         await expect(this.newusergraph).toBeVisible();
+    }
+
+    async clickManan(){
+        await this.manan.click();
+    }
+
+    async checkaftermananclick(){
+        await expect(this.mananhomepage).toBeVisible();
     }
 }
 
