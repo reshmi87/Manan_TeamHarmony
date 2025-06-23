@@ -50,8 +50,8 @@ export class PatientDataPage {
   }
 
   async appPage() {
-    await page.getByRole('button', { name: 'Dashboard' }).click();
-    await page.getByRole('button', { name: 'Start New Assessment' }).click();
+    await this.DashboardBtn.click();
+    await this.StartNewAssessmentBtn.click();
   }
 
 

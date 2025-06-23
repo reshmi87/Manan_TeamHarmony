@@ -95,7 +95,7 @@ test.describe('Patient Data & Symptom Entry', () => {
   test('AI-generated report includes all mandatory clinical sections', async ({ Given, page, When, Then }) => { 
     await Given('The user completes the patient assessment form with valid data', null, { page }); 
     await When('The case is analyzed using the AI engine'); 
-    await Then('The report should validate the presence of all required clinical sections'); 
+    await Then('The report should validate the presence of all required clinical sections', null, { page }); 
   });
 
   test('Validation of Share Analysis with PDF Generation', async ({ Given, page, When, Then }) => { 

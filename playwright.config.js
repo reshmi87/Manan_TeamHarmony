@@ -44,7 +44,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     // screenshot: 'only-on-failure',
     // video:'retain-on-failure',
-     headless: false, // launch browser with GUI for debugging
+     headless: true, // launch browser with GUI for debugging
 
   },
 
