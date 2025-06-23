@@ -42,7 +42,7 @@ When('The user fills in all required information, uploads a valid PDF test repor
 });
 
 Then('The user verifies the triage recommendations are displayed correctly', async ({}) => {
-  await patientDataPage.verifyTriageRecommendationsVisible();
+    await patientDataPage.verifyTriageRecommendationsVisible();
 });
 
 When('The user opens the gender dropdown and selects {string}', async ({page}, gender) => {
@@ -51,13 +51,13 @@ When('The user opens the gender dropdown and selects {string}', async ({page}, g
 });
 
 Then('The user verifies the selected gender is {string}', async ({page}, expectedGender) => {
-     patientDataPage = new PatientDataPage(page);    
+    patientDataPage = new PatientDataPage(page);    
     const selectedGender = await patientDataPage.GenderDropdown.textContent();
     expect(selectedGender.trim()).toContain(expectedGender);   
 });
 
 When('The user opens the gender dropdown again and selects {string}', async ({page}, gender) => {
-     patientDataPage = new PatientDataPage(page); 
+    patientDataPage = new PatientDataPage(page); 
     await patientDataPage.SelectGender(gender);  
 });
 
@@ -77,7 +77,6 @@ When('The user uploads a valid PDF test report', async ({page}) => {
 });
 
 Then('The user verifies the vital signs and lab values fields are populated correctly', async ({}) => { 
-    
     const vitalsText = await patientDataPage.VitalSignField.inputValue();
     expect(vitalsText).toMatch(/AI ANALYSIS:/i);
     expect(vitalsText.length).toBeGreaterThan(20);  
@@ -188,7 +187,6 @@ When('The case is analyzed using the AI engine', async ({}) => {
 });
 
 Then('The report should validate the presence of all required clinical sections', async ({}) => {
-
    // Wait for the AI analysis section to appear
     await expect(patientDataPage.AIAnalysis).toBeVisible({ timeout: 30000 });
     // Wait for the final section to ensure full report load
@@ -219,15 +217,11 @@ Given('The user completed a case and AI analysis is displayed', async ({page}) =
 
 When('The user click the {string} button', async ({page}, buttonName) => {
     await page.getByRole('button', { name: 'Share Analysis' }).click();
-    await patientDataPage.verifyTriageRecommendationsVisible(); // or similar method
+    await patientDataPage.verifyTriageRecommendationsVisible(); 
     await patientDataPage.clickShareAnalysis();  
 });
 
 Then('The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.', async ({page}) => {
-    // Wait for Share options screen to appear and generate PDF      
-    // await patientDataPage.clickShareAnalysis();
     await patientDataPage.verifypdfSuccessPopup();
-    // Verify the success popup text
-    //await page.getByRole('button', { name: 'Share Analysis' }).click(); 
     await expect(page.getByRole('status')).toContainText('PDF Generated');     
 });

@@ -26,7 +26,7 @@ export class PatientDataPage {
     // Analysis
     this.AnalyzeCaseBtn = page.getByRole('button', { name: 'Analyze Case' });
     this.AIAnalysisHeading = page.getByRole('heading', { name: 'AI Analysis' });
-    // Locators for report sections (h2 or h3 with the section titles)
+    // Locators for report sections 
     // Buttons
     this.ShareAnalysisBtn = page.getByRole('button', { name: 'Share Analysis' });
     this.FurtherAnalysisBtn = page.getByRole('button', { name: 'Ask for Further Analysis' });
@@ -41,12 +41,9 @@ export class PatientDataPage {
     this.pdfSuccessPopup = page.getByRole('status').filter({ hasText: 'PDF Generated' }).first();
     this.FurtherAnalysisSuccess = page.getByRole('status').filter({ hasText: 'Success' }).first();
   }
-  // ─── Form Entry ────────────────────────────────────────────────────
-  async appPage() {
-    await this.DashboardBtn.click();
-    await this.StartNewAssessmentBtn.click();
-  }
 
+  // ─── Form Entry ────────────────────────────────────────────────────
+  
   async fillAge() {
     const data = PatientData.CompleteForm
     await this.PatientAgeField.fill(data.Age);
@@ -116,6 +113,7 @@ export class PatientDataPage {
      const data = PatientData.CompleteForm
     await this.DetailedSymtomsField.fill(data.SymptompsDesc);
   }
+
   // ─── Upload ────────────────────────────────────────────────────────
   async uploadTestReport(filePath) {
     const [fileChooser] = await Promise.all([
@@ -128,25 +126,13 @@ export class PatientDataPage {
     await this.waitForVitalsToast();
   }
 
-  async uploadMultipleTestReport(filePath) {
-  const [fileChooser] = await Promise.all([
-    this.page.waitForEvent('filechooser'),
-    this.UploadBtn.click(),
-  ]);
-
-  await fileChooser.setFiles(filePath);}
-
-async waitForVitalsToast() {
+  async waitForVitalsToast() {
   await expect(
     this.page
       .locator('div.text-sm.opacity-90')
       .filter({ hasText: /Blood report values have been added to vitals/i })
   ).toBeVisible({ timeout: 20000 });
-}
-  
-  async waitForVitalsToast() {
-    await expect(this.page.locator('div.text-sm.opacity-90').filter({ hasText: /Blood report values have been added to vitals/i })).toBeVisible({ timeout: 20000 });
-  }  
+  }
   
   async uploadInvalidTestReport(filePath) {
     const [fileChooser] = await Promise.all([
@@ -157,6 +143,7 @@ async waitForVitalsToast() {
   }
 
   // ─── Analysis ──────────────────────────────────────────────────────
+
   async CompleteForm() {
     const data = PatientData.CompleteForm
     await this.fillAge(data.Age);
@@ -175,7 +162,9 @@ async waitForVitalsToast() {
     await expect(this.AIAnalysisHeading).toBeVisible();
     await expect(this.page.locator('.rounded-lg').first()).toBeVisible({ timeout: 30000 });
   }
+
   // ─── Vitals ────────────────────────────────────────────────────────
+
   async clickVitalSigns() {
     const data = PatientData.Vitals
     await this.vitalsTextarea.fill(data.vitalsigns);
@@ -189,12 +178,14 @@ async waitForVitalsToast() {
   }
 
   // ─── Validation Errors ─────────────────────────────────────────────
+
   async verifyValidationErrorPopup() {
     await this.successMessage.waitFor({ state: 'visible' });
     await expect(this.successMessage).toContainText('Failed to parse blood report. Please enter values manually');
     const errormsg = await this.successMessage.textContent();
     console.log(errormsg);
   }
+  
   async verifypdfSuccessPopup() {
     await this.pdfSuccessPopup.waitFor({ state: 'visible' });
     await expect(this.pdfSuccessPopup).toContainText('PDF Generated');
@@ -230,10 +221,6 @@ async waitForVitalsToast() {
     await this.ShareAnalysisBtn.click();
   }
 
-  get analyzingButton() {
-    return this.page.getByRole('button', { name: /Analyzing/i });
-  }
-
   async clickShareAndVerifyPDF() {
   await this.pdfShareBtn.click();
   await expect(this.pdfSuccessPopup).toBeVisible({ timeout: 10000 });
@@ -250,8 +237,6 @@ async waitForVitalsToast() {
     const Error = await this.FurtherAnalysisSuccess.textContent();
     console.log(Error);
   }
-
-
 
   async fillPartialFollowUpQuestions(partialAnswers) {
     for (const [name, answer] of Object.entries(partialAnswers)) {
@@ -276,30 +261,14 @@ async waitForVitalsToast() {
     }
   }
 
-  async fillAllFollowUpQuestions(answers) {
-    for (const [questionId, answer] of Object.entries(answers)) {
-    // Use name attribute selector instead of id
-    await this.page.fill(`textarea[name="${questionId}"]`, answer);
-    }
-  }
-
-// Wait for the follow-up questions form to be fully ready
+ // Wait for the follow-up questions form to be fully ready
   async waitForFollowUpFormReady() {
     // Wait for loading text to disappear
     await this.page.waitForSelector('text=Generating relevant questions...', { state: 'detached', timeout: 280000 });
     // Wait for the first question to appear (name="q1")
     await this.page.waitForSelector('textarea[name="q1"]', {state: 'visible',timeout: 120000,});
   }
-  async waitForModifiedAIAnalysis() {
-    await expect(this.AIAnalysisHeading).toBeVisible({ timeout: 30000 });
-    await expect(this.page.getByText('Triage Level', { exact: false })).toBeVisible({ timeout: 20000 });
-  }
-
-  async verifyFurtherAnalysis() {
-    await expect(this.FurtherPopUp).toBeVisible();
-    await expect(this.FurtherHeading).toContainText('Follow-up Questions');
-  }
-
+  
   async openFurtherAnalysisForm() {
     try {
     await this.page.waitForLoadState('domcontentloaded');
@@ -316,20 +285,9 @@ async waitForVitalsToast() {
     }
   }
 
-
-
-  async clickSubmitAddInfo() {
+ async clickSubmitAddInfo() {
     await this.page.getByRole('button', { name: 'Submit Additional Information' }).click();
   }
 
-  async clickFurtherAnalysisButton() {
-    try {
-    await expect(this.FurtherAnalysisBtn).toBeVisible({ timeout: 60000 }); // ensure it's there
-    await this.FurtherAnalysisBtn.click(); // perform click
-    } catch (error) {
-    console.error('Failed to click Further Analysis button:', error);
-    throw error; // re-throw for Playwright to catch as test failure
-    }
-  }
 }
 module.exports = { PatientDataPage };
