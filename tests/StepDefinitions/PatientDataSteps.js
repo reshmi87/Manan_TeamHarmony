@@ -16,7 +16,8 @@ Given('The user is on the Assessment page of the Manan medical triage system aft
     await signinWindowPage.premiumUserlogin();     
 });
 
-Given('The user navigates to the Assessment page after login', async ({page}) => {   
+Given('The user navigates to the Assessment page after login', async ({page}) => {  
+    patientDataPage = new PatientDataPage(page);  
     await patientDataPage.appPage();
 });
 
