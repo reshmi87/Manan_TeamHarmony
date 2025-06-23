@@ -26,14 +26,13 @@ When('The user uploads multiple valid PDF test reports', async ({}) => {
   path.resolve('tests/Sample reports/HyperThyroid_Report_final.pdf'),
   path.resolve('tests/Sample reports/Patient Portal - health _ labs.pdf')
   ];
-  // Upload files sequentially or in parallel based on app behavior
   for (const pdf of pdfFiles) {
   await patientDataPage.uploadTestReport(pdf);
   }
 });
 
 Then('The user should see all uploaded files listed successfully', async ({page}) => {  
-  await expect(page.getByRole('button', { name: 'Upload Blood Report (0' })).toBeVisible({timeout: 300000});
+  await patientDataPage.fivefiles();
 });
 
 When('The user uploads six valid PDF test reports', async ({}) => {  
@@ -45,12 +44,11 @@ When('The user uploads six valid PDF test reports', async ({}) => {
   path.resolve('tests/Sample reports/Patient Portal - health _ labs.pdf'),
   path.resolve('tests/Sample reports/Diabetic and Hemogram Test_Thyrocare lab.pdf.pdf')
   ];
-  // Upload files sequentially or in parallel based on app behavior
   for (const pdf of pdfFiles) {
      await patientDataPage.uploadMultipleTestReport(pdf);
   }
 });
 
 Then('The user should see the error message"Upload limit reached"', async ({page}) => {
-  await expect(page.getByText('Upload limit reached')).toBeVisible({timeout: 300000});
+  await patientDataPage.multiplefiles();
 });

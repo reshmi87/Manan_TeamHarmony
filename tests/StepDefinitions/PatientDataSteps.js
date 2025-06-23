@@ -17,9 +17,7 @@ Given('The user is on the Assessment page of the Manan medical triage system aft
 });
 
 Given('The user navigates to the Assessment page after login', async ({page}) => {   
-    await page.getByRole('button', { name: 'Dashboard' }).click();
-    await page.getByRole('button', { name: 'Start New Assessment' }).click();
- 
+    await patientDataPage.appPage();
 });
 
 When('The user fills in all required information, uploads a valid PDF test report, and clicks the {string} button', async ({page}, buttonLabel) => {    
@@ -186,24 +184,8 @@ When('The case is analyzed using the AI engine', async ({}) => {
     await patientDataPage.clickAnalyzeCase();
 });
 
-Then('The report should validate the presence of all required clinical sections', async ({}) => {
-   // Wait for the AI analysis section to appear
-    await expect(patientDataPage.AIAnalysis).toBeVisible({ timeout: 30000 });
-    // Wait for the final section to ensure full report load
-    await expect(patientDataPage.page.getByText('Warning signs requiring escalation', { exact: false })).toBeVisible({ timeout: 30000 });
-    // Now verify all expected sections
-    const expectedSections = [
-    'Triage Level',
-    'TOP 3-5 POSSIBLE DIAGNOSES',
-    'Key clinical concerns and risk factors',
-    'Immediate actions/interventions needed',
-    'Recommended diagnostic tests',
-    'Specialist referral recommendations',
-    'Warning signs requiring escalation'
-    ];
-    for (const section of expectedSections) {
-    await expect(patientDataPage.page.getByText(section, { exact: false })).toBeVisible({ timeout: 10000 });
-    }
+Then('The report should validate the presence of all required clinical sections', async ({page}) => {
+   await patientDataPage.allRequiredsections(page);
 });
 
 Given('The user completed a case and AI analysis is displayed', async ({page}) => {
@@ -216,12 +198,12 @@ Given('The user completed a case and AI analysis is displayed', async ({page}) =
 });
 
 When('The user click the {string} button', async ({page}, buttonName) => {
-    await page.getByRole('button', { name: 'Share Analysis' }).click();
+    await patientDataPage.ShareAnalysisBtnclick();
     await patientDataPage.verifyTriageRecommendationsVisible(); 
     await patientDataPage.clickShareAnalysis();  
 });
 
 Then('The Share option screen appears, the pdf is generated and the confirmation pop up which contains PDF generated successfully is displayed.', async ({page}) => {
     await patientDataPage.verifypdfSuccessPopup();
-    await expect(page.getByRole('status')).toContainText('PDF Generated');     
+      
 });

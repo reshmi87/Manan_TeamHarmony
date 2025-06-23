@@ -33,10 +33,6 @@ Scenario: Submitting an empty payment form
 Scenario: Checking Empty card number
   When The user clicks the Subscribe button without entering any card number
   Then The user receives field validation error
-
-  # Scenario: Checking declined card error
-  # When The user enters a credit card number that is known to be declined to subscribe
-  # Then An error message should appear indicating that the card was declined
    
 Scenario: Checking Empty cardholder Name
   When The user clicks the Subscribe button without entering cardholder Name
