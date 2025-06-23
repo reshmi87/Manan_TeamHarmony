@@ -127,6 +127,22 @@ export class PatientDataPage {
     await expect(this.page.locator('div.text-sm.opacity-90').filter({ hasText: /Blood report values have been added to vitals/i })).toBeVisible({ timeout: 20000 });
     await this.waitForVitalsToast();
   }
+
+  async uploadMultipleTestReport(filePath) {
+  const [fileChooser] = await Promise.all([
+    this.page.waitForEvent('filechooser'),
+    this.UploadBtn.click(),
+  ]);
+
+  await fileChooser.setFiles(filePath);}
+
+async waitForVitalsToast() {
+  await expect(
+    this.page
+      .locator('div.text-sm.opacity-90')
+      .filter({ hasText: /Blood report values have been added to vitals/i })
+  ).toBeVisible({ timeout: 20000 });
+}
   
   async waitForVitalsToast() {
     await expect(this.page.locator('div.text-sm.opacity-90').filter({ hasText: /Blood report values have been added to vitals/i })).toBeVisible({ timeout: 20000 });
