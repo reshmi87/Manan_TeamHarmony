@@ -49,6 +49,12 @@ export class PatientDataPage {
     await this.PatientAgeField.fill(data.Age);
   }
 
+  async appPage() {
+    await page.getByRole('button', { name: 'Dashboard' }).click();
+    await page.getByRole('button', { name: 'Start New Assessment' }).click();
+  }
+
+
   async emptyAge() {
     const data = PatientData.CompleteForm
     await this.GenderDropdown.click();
@@ -121,7 +127,6 @@ export class PatientDataPage {
     this.UploadBtn.click(),
     ]);
     await fileChooser.setFiles(filePath);
-    //  Wait for success toast or AI output to confirm upload worked
     await expect(this.page.locator('div.text-sm.opacity-90').filter({ hasText: /Blood report values have been added to vitals/i })).toBeVisible({ timeout: 20000 });
     await this.waitForVitalsToast();
   }
@@ -191,6 +196,7 @@ export class PatientDataPage {
     await expect(this.pdfSuccessPopup).toContainText('PDF Generated');
     const errorpdfmsg = await this.pdfSuccessPopup.textContent();
     console.log(errorpdfmsg);
+     await expect(page.getByRole('status')).toContainText('PDF Generated');  
   }
 
   async AgeMissing() {
@@ -221,6 +227,10 @@ export class PatientDataPage {
     await this.ShareAnalysisBtn.click();
   }
 
+  async ShareAnalysisBtnclick() {
+      await page.getByRole('button', { name: 'Share Analysis' }).click();
+  }
+
   async clickShareAndVerifyPDF() {
   await this.pdfShareBtn.click();
   await expect(this.pdfSuccessPopup).toBeVisible({ timeout: 10000 });
@@ -229,8 +239,7 @@ export class PatientDataPage {
   async clickFurtherAnalysis() {
     await this.FurtherAnalysisBtn.click();
   }
-
-  // Verify error message shown when follow-up questions are incomplete
+ 
   async followUpQuestionMissingError() {
     await this.FurtherAnalysisSuccess.waitFor({ state: 'visible' });
     await expect(this.FurtherAnalysisSuccess).toContainText('Please answer all questions before submitting');
@@ -261,11 +270,8 @@ export class PatientDataPage {
     }
   }
 
- // Wait for the follow-up questions form to be fully ready
   async waitForFollowUpFormReady() {
-    // Wait for loading text to disappear
     await this.page.waitForSelector('text=Generating relevant questions...', { state: 'detached', timeout: 280000 });
-    // Wait for the first question to appear (name="q1")
     await this.page.waitForSelector('textarea[name="q1"]', {state: 'visible',timeout: 120000,});
   }
   
@@ -277,7 +283,6 @@ export class PatientDataPage {
     await expect(button).toBeVisible({ timeout: 60000 });
     await expect(button).toBeEnabled();
     await button.click();
-    // Optional: confirm next step loaded
     await this.page.getByRole('heading', { name: 'Follow-up Questions' }).waitFor({ timeout: 5000 });
     } catch (err) {
     console.error('Could not open Further Analysis form:', err);
@@ -285,8 +290,34 @@ export class PatientDataPage {
     }
   }
 
- async clickSubmitAddInfo() {
+  async clickSubmitAddInfo() {
     await this.page.getByRole('button', { name: 'Submit Additional Information' }).click();
+  }
+
+  async allRequiredsections(page) {
+        
+        await expect(this.AIAnalysis).toBeVisible({ timeout: 30000 });
+        await expect(page.getByText('Warning signs requiring escalation', { exact: false })).toBeVisible({ timeout: 30000 });
+        const expectedSections = [
+        'Triage Level',
+        'TOP 3-5 POSSIBLE DIAGNOSES',
+        'Key clinical concerns and risk factors',
+        'Immediate actions/interventions needed',
+        'Recommended diagnostic tests',
+        'Specialist referral recommendations',
+        'Warning signs requiring escalation'
+        ];
+        for (const section of expectedSections) {
+        await expect(page.getByText(section, { exact: false })).toBeVisible({ timeout: 10000 });
+        }
+  }
+
+  async fivefiles() {
+    await expect(page.getByRole('button', { name: 'Upload Blood Report (0' })).toBeVisible({timeout: 300000});
+  }
+
+  async multiplefiles() {
+    await expect(page.getByText('Upload limit reached')).toBeVisible({timeout: 300000});
   }
 
 }
