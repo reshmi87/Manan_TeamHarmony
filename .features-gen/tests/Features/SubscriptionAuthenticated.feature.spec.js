@@ -39,6 +39,12 @@ test.describe('Subscription page for Authenticated users', () => {
     await Then('Verify the Current Plan shows it is Free and a Upgrade to Premium button is displayed', null, { page }); 
   });
 
+  test('Validate Manan link is functional from the Subscription page', async ({ Given, page, When, Then }) => { 
+    await Given('The user is in the Subscription Page', null, { page }); 
+    await When('The user clicks on the link Manan at the top in Subscription page', null, { page }); 
+    await Then('Self Assessment page is displayed when the clicked on Manan from Subscription Page', null, { page }); 
+  });
+
 });
 
 // == technical section ==
@@ -61,4 +67,5 @@ const bddFileData = [ // bdd-data-start
   {"pwTestLine":24,"pickleLine":18,"tags":[],"steps":[{"pwStepLine":25,"gherkinStepLine":19,"keywordType":"Context","textWithKeyword":"Given A New user logged in to the Manan Application","stepMatchArguments":[]},{"pwStepLine":26,"gherkinStepLine":20,"keywordType":"Action","textWithKeyword":"When The user clicks on the Subscription Plans from the Profile at the top","stepMatchArguments":[]},{"pwStepLine":27,"gherkinStepLine":21,"keywordType":"Outcome","textWithKeyword":"Then Verify the Free Plan block is displayed with the Current Plan button disabled","stepMatchArguments":[]}]},
   {"pwTestLine":30,"pickleLine":23,"tags":[],"steps":[{"pwStepLine":31,"gherkinStepLine":24,"keywordType":"Context","textWithKeyword":"Given A New user logged in to the Manan Application","stepMatchArguments":[]},{"pwStepLine":32,"gherkinStepLine":25,"keywordType":"Action","textWithKeyword":"When The user clicks on the Subscription Plans from the Profile at the top","stepMatchArguments":[]},{"pwStepLine":33,"gherkinStepLine":26,"keywordType":"Outcome","textWithKeyword":"Then Verify the Premium plan block is displayed with Subscribe button enabled","stepMatchArguments":[]}]},
   {"pwTestLine":36,"pickleLine":28,"tags":[],"steps":[{"pwStepLine":37,"gherkinStepLine":29,"keywordType":"Context","textWithKeyword":"Given A New user logged in to the Manan Application","stepMatchArguments":[]},{"pwStepLine":38,"gherkinStepLine":30,"keywordType":"Action","textWithKeyword":"When The user clicks on the Subscription Plans from the Profile at the top","stepMatchArguments":[]},{"pwStepLine":39,"gherkinStepLine":31,"keywordType":"Outcome","textWithKeyword":"Then Verify the Current Plan shows it is Free and a Upgrade to Premium button is displayed","stepMatchArguments":[]}]},
+  {"pwTestLine":42,"pickleLine":33,"tags":[],"steps":[{"pwStepLine":43,"gherkinStepLine":34,"keywordType":"Context","textWithKeyword":"Given The user is in the Subscription Page","stepMatchArguments":[]},{"pwStepLine":44,"gherkinStepLine":35,"keywordType":"Action","textWithKeyword":"When The user clicks on the link Manan at the top in Subscription page","stepMatchArguments":[]},{"pwStepLine":45,"gherkinStepLine":36,"keywordType":"Outcome","textWithKeyword":"Then Self Assessment page is displayed when the clicked on Manan from Subscription Page","stepMatchArguments":[]}]},
 ]; // bdd-data-end
