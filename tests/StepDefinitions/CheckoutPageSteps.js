@@ -166,22 +166,4 @@ Then('A confirmation message should appear indicating successful payment', async
         const checkoutPage = new CheckoutPage(page);
         await checkoutPage.verifyPaymentSuccess();
 });
-  
-Given('The user signs in using a valid username and password from the Signin window', async ({page}) => {
-        homePage = new HomePage(page);
-        checkoutPage = new CheckoutPage(page);
-        signinWindowPage = new SigninWindowPage(page);
-        await homePage.clickTryForFreeButton();
-        await signinWindowPage.validSigninwithexistingusernamePassword();
-        await checkoutPage.gotoSubscriptionPage();
-        console.log('User signed in with username password/not logged in via continue with Google option')
-});
-
-When('The user attempts to upgrade to a Premium subscription', async ({}) => {
-        await checkoutPage.clickSubscribeNowButton();
-});
-
-Then('The user should be redirected to the checkout page', async ({}) => {
-        await checkoutPage.verifyCheckoutPageforSignedupuser();
-        console.log('User Should redirected to checkout process')
-});
+ 

@@ -23,7 +23,8 @@ export class CheckoutPage {
         this.viewPlansBtn = page.getByRole('button', { name: 'View Subscription Plans' });
         this.rootLocator = page.locator('#root');
         this.heading = page.getByRole('heading');
-        this.saveInfoCheckbox = page.getByRole('checkbox', { name: 'Save my info for 1-click' });
+        //this.saveInfoCheckbox = page.getByRole('checkbox', { name: 'Save my info for 1-click' });
+        this.saveInfoCheckbox = page.getByRole('checkbox', { name: 'Save my information for' });
         this.phoneNumberInput = page.getByRole('textbox', { name: 'Phone number' });
         this.successMessage = page.getByRole('status');
         this.subscriptionStatus = page.getByText('Subscription Status: active');
@@ -183,6 +184,10 @@ export class CheckoutPage {
 
     async clickSubscribeNowButton() {
         await this.subscribeNowButton.click();
+    }
+
+    async checkoutSubscribe() {
+        await this.subscribeButton.click();
     }
 
 }
