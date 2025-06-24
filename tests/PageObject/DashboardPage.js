@@ -24,7 +24,7 @@ class DashboardPage {
         this.updatesettingslink = page.getByRole('button', { name: 'Update settings →' });
         this.subscriptionplanstitle = page.getByRole('heading', { name: 'Subscription Plans' });
         this.subscriptionplanstext = page.getByText('Upgrade to Premium for');
-        this.upgradenowlink = page.getByRole('button', { name: 'Upgrade now →' });
+        this.upgradenowlink = page.getByRole('button', { name: 'Upgrade now' });
         this.assessmenthistorytitle = page.getByRole('heading', { name: 'Assessment History' });
         this.assessmenthistorytext = page.getByText('View your previous medical');
         this.viewhistorylink = page.getByRole('button', { name: 'View history →' });
