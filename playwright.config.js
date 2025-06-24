@@ -3,7 +3,7 @@ const { defineConfig, devices } = require('@playwright/test');
 import { defineBddConfig } from 'playwright-bdd';
 
 const testDir = defineBddConfig({
-  features:['tests/Features/***.feature'],
+  features:['tests/Features/**/*.feature'],
  steps:['tests/StepDefinitions/***.js','tests/Hooks/Hooks.js'],
  
 });
@@ -33,10 +33,10 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
  reporter: [["list"],["html"], ["allure-playwright",{outputFolder:'results'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
- timeout: 200000, // sets default timeout for each test to 60 seconds
+ timeout: 200000, // sets default timeout for each test 
   use: {
-    actionTimeout: 20000,
-    navigationTimeout: 30000, // sets default timeout for navigation actions to 30 seconds
+    //actionTimeout: 20000,
+    //navigationTimeout: 30000, // sets default timeout for navigation actions to 30 seconds
     /* Base URL to use in actions like await page.goto('/'). */
     // baseURL: 'http://localhost:3000',
 
@@ -44,7 +44,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     // screenshot: 'only-on-failure',
     // video:'retain-on-failure',
-     headless: true, // launch browser with GUI for debugging
+    headless: true, // launch browser with GUI for debugging
 
   },
 

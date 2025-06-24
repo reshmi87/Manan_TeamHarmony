@@ -32,7 +32,7 @@ When('The user clicks the Pay with Link button', async ({}) => {
         console.log('User clicks Pay with link button')     
 });
 
-Then('A pop-up window should appear prompting the user to log in with their Email ID and proceed to the payment gateway with the Pay button enabled', async ({}) => {
+Then('A pop-up window should appear prompting the user to log in with their Email ID and proceed to the payment gateway with the Pay button', async ({}) => {
         await expect(popup.getByRole('button', { name: 'Link logo' })).toBeVisible();
         await expect(popup.getByRole('heading', { name: 'Fast, secure, 1-click checkout' })).toBeVisible();
         await expect(popup.getByRole('main')).toContainText('Pay $19.99');
