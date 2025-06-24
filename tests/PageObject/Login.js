@@ -30,7 +30,7 @@ class Login {
         await this.continuewithgoogle.click();
         await this.email.fill(process.env.username);
         await this.next.click();
-        await this.googlepassword.fill(process.env.password);
+        await this.googlepassword.fill(process.env.premiumPassword);
         await this.next.click();
     }
 

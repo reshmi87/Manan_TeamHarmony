@@ -68,7 +68,7 @@ Scenario: Validate log out
    When The user clicks on Log out from Profile link on the top
    Then User is successfully logged out
 
-Scenario: Validate the Dashboard page when signed in to the premium accoutn through Google Sign in
+Scenario: Validate the Dashboard page when signed in to the premium account through Google Sign in
    Given The user signed in to his premium account using Google Sign in
    When The user navigates to the Dashboard page
    Then Every blocks and link in the dashboard page are displayed properly for the Premium user

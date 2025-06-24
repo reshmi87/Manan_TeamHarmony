@@ -85,7 +85,7 @@ test.describe('Dashboard Validation', () => {
     await Then('User is successfully logged out', null, { page }); 
   });
 
-  test('Validate the Dashboard page when signed in to the premium accoutn through Google Sign in', async ({ Given, page, When, Then }) => { 
+  test('Validate the Dashboard page when signed in to the premium account through Google Sign in', async ({ Given, page, When, Then }) => { 
     await Given('The user signed in to his premium account using Google Sign in', null, { page }); 
     await When('The user navigates to the Dashboard page', null, { page }); 
     await Then('Every blocks and link in the dashboard page are displayed properly for the Premium user', null, { page }); 

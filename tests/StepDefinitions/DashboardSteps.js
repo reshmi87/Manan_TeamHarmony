@@ -1,7 +1,6 @@
 import { createBdd } from "playwright-bdd";
 import { expect} from '@playwright/test';
 const Login = require("../PageObject/Login.js");
-const SigninWindowPage = require("../PageObject/SigninWindowPage.js");
 const  DashboardPage  = require("../PageObject/DashboardPage.js");
 
 const{Given,When,Then} = createBdd();
