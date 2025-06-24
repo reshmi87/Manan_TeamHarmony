@@ -21,3 +21,9 @@ Scenario: Verifying that a signed-up user can subscribe to Premium
   Given The user signs in using a valid username and password from the Signin window
   When The user attempts to upgrade to a Premium subscription
   Then The user should be redirected to the checkout page
+
+# Scenario: Completing the subscription
+#     Given The user signs in using a valid username and password from the Signin window with random email
+#     When The user submits the payment form with valid credit card information
+#     Then A confirmation message should appear indicating successful payment
+
