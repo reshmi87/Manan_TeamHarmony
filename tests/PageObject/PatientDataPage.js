@@ -196,7 +196,7 @@ export class PatientDataPage {
     await expect(this.pdfSuccessPopup).toContainText('PDF Generated');
     const errorpdfmsg = await this.pdfSuccessPopup.textContent();
     console.log(errorpdfmsg);
-     await expect(page.getByRole('status')).toContainText('PDF Generated');  
+     await expect(this.page.getByRole('status')).toContainText('PDF Generated');  
   }
 
   async AgeMissing() {
@@ -228,7 +228,7 @@ export class PatientDataPage {
   }
 
   async ShareAnalysisBtnclick() {
-      await page.getByRole('button', { name: 'Share Analysis' }).click();
+      await this.page.getByRole('button', { name: 'Share Analysis' }).click();
   }
 
   async clickShareAndVerifyPDF() {
@@ -296,7 +296,7 @@ export class PatientDataPage {
 
   async allRequiredsections(page) {
         
-        await expect(this.AIAnalysis).toBeVisible({ timeout: 30000 });
+        await expect(this.AIAnalysisHeading).toBeVisible({ timeout: 30000 });
         await expect(page.getByText('Warning signs requiring escalation', { exact: false })).toBeVisible({ timeout: 30000 });
         const expectedSections = [
         'Triage Level',

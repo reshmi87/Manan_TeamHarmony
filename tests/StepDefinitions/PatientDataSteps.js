@@ -199,6 +199,7 @@ Given('The user completed a case and AI analysis is displayed', async ({page}) =
 });
 
 When('The user click the {string} button', async ({page}, buttonName) => {
+    patientDataPage = new PatientDataPage(page); 
     await patientDataPage.ShareAnalysisBtnclick();
     await patientDataPage.verifyTriageRecommendationsVisible(); 
     await patientDataPage.clickShareAnalysis();  
