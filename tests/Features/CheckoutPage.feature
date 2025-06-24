@@ -8,7 +8,7 @@ Scenario: Viewing the Premium subscription checkout page
 
 Scenario: Paying with Link
   When The user clicks the Pay with Link button
-  Then A pop-up window should appear prompting the user to log in with their Email ID and proceed to the payment gateway with the Pay button enabled
+  Then A pop-up window should appear prompting the user to log in with their Email ID and proceed to the payment gateway with the Pay button
 
 Scenario: Providing valid payment details
   When The user enters valid credit card information in the payment method form 
