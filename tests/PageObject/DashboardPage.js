@@ -15,7 +15,7 @@ class DashboardPage {
         this.analysisusagetitle = page.getByRole('heading', { name: 'Analysis Usage' });
         this.analysisusagetext = page.getByText('Free tier allows 20 analyses');
         this.analysisusagegraph = page.locator('text=of 20');
-        this.upgradetopremiumbutton = page.getByRole('link', { name: 'Upgrade to Premium' });
+        this.upgradetopremiumbutton = page.getByRole('link', { name: 'Upgrade Now' })
         this.recentassessmenttitle = page.getByRole('heading', { name: 'Recent Assessments' });
         this.recentassessmenttext = page.getByText('You have no recent');
         this.startyourfirstassessmentlink = page.getByRole('button', { name: 'Start your first assessment →' });
