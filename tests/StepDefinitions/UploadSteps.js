@@ -45,7 +45,7 @@ When('The user uploads six valid PDF test reports', async ({}) => {
   path.resolve('tests/Sample reports/Diabetic and Hemogram Test_Thyrocare lab.pdf.pdf')
   ];
   for (const pdf of pdfFiles) {
-     await patientDataPage.uploadMultipleTestReport(pdf);
+     await patientDataPage.uploadTestReport(pdf);
   }
 });
 

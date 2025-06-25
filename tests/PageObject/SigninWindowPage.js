@@ -67,21 +67,6 @@ export class SigninWindowPage {
     await expect(this.signuptabEmail).toBeVisible();
   }
 
-  /*async signInWithExistingGoogleUser() {
-await page.getByRole('button', { name: 'Sign In' }).click();
-await page.getByRole('tab', { name: 'Sign Up' }).click();
-await page.getByRole('textbox', { name: 'Email Address' }).click();
-await page.getByText('Email Address').click();
-await page.getByRole('textbox', { name: 'Username' }).click();
-await page.getByText('Email Address').click();
-await expect(page.locator('form')).toContainText('Email Address');
-await expect(page.getByRole('textbox', { name: 'Email Address' })).toBeVisible();
-await expect(page.getByText('UsernameEmail')).toBeVisible();
-
-  //  await this.continueWithGoogleButton.click();
-  //  await this.alreadyGoogleuser.click();
-  // } */
- 
   async switchToSignUpTab() {
     await this.signUpTab.click();
   }
